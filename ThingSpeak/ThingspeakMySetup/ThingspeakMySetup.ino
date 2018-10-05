@@ -16,7 +16,8 @@
 #include <SPI.h>
 #include <WiFi101.h>
 //================================================================================
-char password[] = "PASSWORD";   // your network password
+const char ssid[] = "SSID";
+const char password[] = "PASSWORD";   // your network password
 WiFiClient  client; 
 //================================================================================
 unsigned long myChannelNumber = 0; //Put your channel number in here
@@ -25,7 +26,7 @@ const char * myWriteAPIKey = "ABCDEFGHIJKLMNOP"; //Put your API key in here
 
 void setup() 
 {
-  connectToHanabi(password);
+  connectToWifiNetwork(ssid,password);
   /* Now connect to ThingSpeak */
   ThingSpeak.begin(client);
   Serial.println("Started");
