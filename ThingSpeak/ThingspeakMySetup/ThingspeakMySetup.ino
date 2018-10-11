@@ -1,15 +1,10 @@
 /*
   ThingSpeakSetup
-  
-  Reads an analog voltage from pin 0, and writes it to a channel on ThingSpeak every 20 seconds.
 
+  This Example will send a random number betyween 0 to 1000 to a specified number of fields.
 
-   Visit https://www.thingspeak.com to sign up for a free account and create
-  a channel.  The video tutorial http://community.thingspeak.com/tutorials/thingspeak-channels/ 
-  has more information. You need to change this to your channel, and your write API key
-  
-  IF YOU SHARE YOUR CODE WITH OTHERS, MAKE SURE YOU REMOVE YOUR WRITE API KEY!!
-  
+  Pay attention to Serial Output for information about your WiFi Card
+
 */
 //================================================================================
 #include "ThingSpeak.h"
@@ -18,31 +13,41 @@
 //================================================================================
 const char ssid[] = "SSID";
 const char password[] = "PASSWORD";   // your network password
-WiFiClient  client; 
+WiFiClient  client;
 //================================================================================
 unsigned long myChannelNumber = 0; //Put your channel number in here
 const char * myWriteAPIKey = "ABCDEFGHIJKLMNOP"; //Put your API key in here
 //================================================================================
+// Data vairables
 
-void setup() 
-{
-  connectToWifiNetwork(ssid,password);
-  /* Now connect to ThingSpeak */
-  ThingSpeak.begin(client);
-  Serial.println("Started");
-}
+uint8_t fields = 2; // number of fields in channel
+
 //================================================================================
-void loop() 
-{  
-  int sensorValue = analogRead(A5);
-  float voltage = sensorValue * (3.3 / 1024.0); //The voltage can be between 0 and 3.3v, and gives readings from 0 to 2013
-  
-  ThingSpeak.setField(1,(float)analogRead(A5));
-  //ThingSpeak.setField(2,(float)analogRead(A0));
+void setup()
+{
+  connectToWifiNetwork(ssid, password);
+  ThingSpeak.begin(client); // Now connect to ThingSpeak
+  Serial.println("Started");
+  randomSeed(analogRead(0)); // Seed the random number generator
+}
+
+//================================================================================
+
+void loop()
+{
+
+  for (int i = 0; i < fields; ++i)
+  {
+    int randomNumber = random(1000);
+    Serial.print(randomNumber); Serial.print(" ");
+    ThingSpeak.setField(i, randomNumber);
+  }
+  Serial.println();
+
   int resp = ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);
 
-  //int resp = ThingSpeak.writeField(myChannelNumber, 1, voltage, myWriteAPIKey);
   Serial.print("Response: ");
   Serial.println(resp);
-  delay(2000); // ThingSpeak will only accept updates every 15 seconds.
+
+  delay(20000); // ThingSpeak will only accept updates every 15 seconds.
 }

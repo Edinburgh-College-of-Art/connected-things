@@ -9,9 +9,9 @@
 //===========================================================================
 #include <WiFi101.h>
 //===========================================================================
-void sendDataToThingSpeak(String data[], int numberOfFields, String channelAPIKey)
+void sendDataToThingSpeak(String data[], int numberOfFields, String channelAPIKey, WiFiClient &client)
 {
-    WiFiClient client;
+    
     String dataString = "";
     
     for (int i = 0; i < numberOfFields; ++i)
@@ -19,6 +19,7 @@ void sendDataToThingSpeak(String data[], int numberOfFields, String channelAPIKe
     
     Serial.println(dataString);
     char thingSpeakAddress[] = "api.thingspeak.com";
+
     
     Serial.println("connecting to ThingSpeak ...");
     if (client.connect(thingSpeakAddress, 80))
@@ -36,8 +37,11 @@ void sendDataToThingSpeak(String data[], int numberOfFields, String channelAPIKe
     else
     {
         Serial.println("Could Not Connect\n");
+        client.flush();
+        client.stop();
+        printWiFiStatus();       
     }
-    client.stop();
+    
 }
 //===========================================================================
 #endif /* ECA_THING_SPEAK */
