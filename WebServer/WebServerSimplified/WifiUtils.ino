@@ -29,10 +29,12 @@ void connectToWifiNetwork(const char ssidName[], const char pass[])
   else if ( conn == WL_IDLE_STATUS )
   {
     Serial.println("Idle");
+    errorProtocol();
   }
   else
   {
     Serial.println("Unknown response");
+    errorProtocol();
   }
 
 }

@@ -13,7 +13,7 @@ int status = WL_IDLE_STATUS;
 WiFiServer server(80);
 //========================================================================
 void setup()
-{
+{ 
   //  connectToWifiNetwork(ssid, pass);
   setAccessPoint(ssid, ipAddress);
   printWiFiStatus();
@@ -21,7 +21,15 @@ void setup()
 //========================================================================
 void loop()
 {
-    reportConnection();
-    deliverWebsite();
+  reportConnection();
+  deliverWebsite();
 }
 //========================================================================
+
+void errorProtocol()
+{
+  while (true)
+  {
+    // do something if there is a problem
+  }
+}

@@ -1,3 +1,5 @@
+//========================================================================
+
 void setAccessPoint(const char ssidName[], IPAddress ip)
 {
   Serial.begin(9600);
@@ -10,7 +12,7 @@ void setAccessPoint(const char ssidName[], IPAddress ip)
   if (WiFi.status() == WL_NO_SHIELD)
   {
     Serial.println("WiFi shield not present");
-    while (true) {};
+    errorProtocol();
   }
 
   WiFi.config(ip);
@@ -22,7 +24,7 @@ void setAccessPoint(const char ssidName[], IPAddress ip)
   if (status != WL_AP_LISTENING)
   {
     Serial.println("Creating access point failed");
-    while (true) {};
+    errorProtocol();
   }
   delay(10000);
   Serial.print("To see this page in action, open a browser to http://");
