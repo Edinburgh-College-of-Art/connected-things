@@ -9,7 +9,7 @@
 #include "ecaWifiUilities.h"
 #include "talkToThingSpeak.h"
 //==============================================================================
-String APIkey = "ABCDERFGHIJKLMOP"; // Use your own API WRITE key here!
+String APIkey = "K30EDTYMGIG43TZA"; // Use your own API WRITE key here!
 const uint8_t fields = 2;           // number of thing speak fields
 uint32_t data[fields]  = {0};       // The data is an integer
 //==============================================================================
@@ -19,7 +19,7 @@ void setup()
 {
   Serial.begin(9600);
   while (!Serial) {} // This is required with the M0 due to a bug
-  connectToHanabi("PASSWORD");
+  connectToHanabi("lowernorwood");
   randomSeed(analogRead(0)); // Seed the random number generator
   Serial.println(thingSpeakClient.connected());
 }
@@ -42,4 +42,3 @@ void loop()
 }
 
 //===========================================================================
-

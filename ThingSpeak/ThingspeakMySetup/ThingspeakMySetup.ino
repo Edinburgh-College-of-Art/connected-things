@@ -11,12 +11,12 @@
 #include <SPI.h>
 #include <WiFi101.h>
 //================================================================================
-const char ssid[] = "SSID";
-const char password[] = "PASSWORD";   // your network password
+const char ssid[] = "BaronVonTiggles";
+const char password[] = "test1234";   // your network password
 WiFiClient  client;
 //================================================================================
-unsigned long myChannelNumber = 0; //Put your channel number in here
-const char * myWriteAPIKey = "ABCDEFGHIJKLMNOP"; //Put your API key in here
+unsigned long myChannelNumber = 540971; //Put your channel number in here
+const char * myWriteAPIKey = "K30EDTYMGIG43TZA"; //Put your API key in here
 //================================================================================
 // Data vairables
 
