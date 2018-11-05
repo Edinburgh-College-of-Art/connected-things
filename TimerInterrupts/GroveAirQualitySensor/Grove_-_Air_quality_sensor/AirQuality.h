@@ -24,7 +24,9 @@
 class AirQuality
 {
 public:
-    int i ;
+    //--------------------------------------------------------------------------
+    // Members
+    int i;
     long vol_standard;
     int init_voltage;
     int first_vol;
@@ -33,10 +35,16 @@ public:
     int counter;
     boolean timer_index;
     boolean error;
-    void init(int pin);
-    int slope(void);
+    //--------------------------------------------------------------------------
+    // Methods
+    void init (int pin);
+    int  slope(void);
 private:
+    //--------------------------------------------------------------------------
+    // Members
     int _pin;
+    //--------------------------------------------------------------------------
+    // Methods
     void avgVoltage(void);
 };
 #endif
