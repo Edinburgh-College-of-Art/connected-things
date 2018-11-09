@@ -18,28 +18,30 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+//==============================================================================
 #ifndef __AIRQUALITY_H__
 #define __AIRQUALITY_H__
-#include"Arduino.h"
+//==============================================================================
+#include "Arduino.h"
+//==============================================================================
 class AirQuality
 {
-public:
+  public:
     //--------------------------------------------------------------------------
     // Members
-    int i;
+    uint16_t averaging_count = 0;        
     long vol_standard;
     int init_voltage;
     int first_vol;
     int last_vol;
     long temp;
-    int counter;
     boolean timer_index;
     boolean error;
     //--------------------------------------------------------------------------
     // Methods
-    void init (int pin);
-    int  slope(void);
-private:
+    void     init  (int pin);
+    uint8_t  slope (void);
+  private:
     //--------------------------------------------------------------------------
     // Members
     int _pin;

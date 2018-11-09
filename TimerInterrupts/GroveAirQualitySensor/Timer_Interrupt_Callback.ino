@@ -3,7 +3,7 @@
 
 void timerCallback()
 {
-  if (airqualitysensor.counter == 2000) // set detected duty
+  if (airqualitysensor.counter == 122) // set 2 seconds as a detected duty
   {
     airqualitysensor.last_vol = airqualitysensor.first_vol;
     airqualitysensor.first_vol = analogRead(A0);
