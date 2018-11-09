@@ -13,7 +13,7 @@ AirQuality airqualitysensor;
 bool ledState = false;
 const uint8_t ledPin = A5;
 unsigned long previousMillis = 0; // will store last time reading was taken
-const long readInterval = 2000;   // interval to take readings
+const long readInterval = 200;   // interval to take readings
 //==============================================================================
 void setup()
 {

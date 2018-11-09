@@ -1,16 +1,20 @@
 //==============================================================================
-// This is what will happen evertime the timer interrupt executes
 
 void getAirQuality()
 {
   unsigned long currentMillis = millis();
   if (currentMillis - previousMillis >= readInterval)
   {
+    //--------------------------------------------------------------------------
     previousMillis = currentMillis;
+    //--------------------------------------------------------------------------
     airqualitysensor.last_vol = airqualitysensor.first_vol;
     airqualitysensor.first_vol = analogRead(A0);
+
+    
     digitalWrite(LED_BUILTIN, !(digitalRead(LED_BUILTIN) == HIGH)); // alternate the LED: kind of hacky, try not to do this
-    analyseAirQuality(airqualitysensor.slope());
+//    analyseAirQuality(airqualitysensor.slope());
+    //--------------------------------------------------------------------------
   }
 }
 
