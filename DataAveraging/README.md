@@ -26,7 +26,7 @@ There are then two functions that you will want to use
 Adds a new data point to the moving average filter and return an averaged value given the current window state.
 
 ```c++
-int averageNumber = filter.process(windowSize);
+int averageNumber = filter.process(random(1000)); // filter random noise
 ```
 
 
