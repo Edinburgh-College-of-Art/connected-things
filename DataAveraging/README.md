@@ -33,3 +33,7 @@ int averageNumber = filter.process(random(1000)); // filter random noise
 ## `MovingAverageFilter::getCurrentAverage()`
 
 This function gets the last average calculated by the moving average filter.     
+
+```c++
+int averageNumber = filter.getCurrentAverage(); // get the last average value
+```
