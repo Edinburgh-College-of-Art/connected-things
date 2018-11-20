@@ -19,6 +19,8 @@ class RotaryEncoder
     // return the current value based sensitivity
     int getValue();
     //===================================================================
+    // clamp a value to the given min and max of the object
+    int clamp(int input);    
   private:
     int counter = 0;
     bool previousState;

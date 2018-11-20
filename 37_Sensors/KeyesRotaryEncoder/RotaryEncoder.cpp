@@ -27,27 +27,40 @@ void RotaryEncoder::setup()
 
 void RotaryEncoder::update()
 {
-  bool currentState = digitalRead(pinA); // Reads the "current" state of the outputA
+  bool currentState = digitalRead(pinA);
 
-  if (currentState != previousState) //If previous and current state of outputA are different, a Pulse has occured
+  if (currentState != previousState)
   {
-    if (digitalRead(pinB) != currentState)  // If outputB state is different outputA state, the encoder is rotating clockwise
+    if (digitalRead(pinB) != currentState)
     {
       counter ++;
+      if (counter > max * sensitivity)
+      {
+        counter = max * sensitivity;
+      }
     }
     else
     {
       counter --;
+      if (counter < min * sensitivity)
+      {
+        counter = min * sensitivity;
+      }
     }
     Serial.print("Position: ");
     Serial.println(getValue());
   }
-  previousState = currentState ; //Updates the previous state of outputA with the current state
+  previousState = currentState ;
 }
 //===================================================================
 int RotaryEncoder::getValue()
 {
-  int out = counter / sensitivity;
+  return clamp(counter / sensitivity);
+}
+//===================================================================
+int RotaryEncoder::clamp(int input)
+{
+  int out = input;
   if (out < min)
   {
     out = min;
@@ -58,4 +71,3 @@ int RotaryEncoder::getValue()
   }
   return out;
 }
-//===================================================================
