@@ -47,14 +47,16 @@ void RotaryEncoder::update()
         counter = min * sensitivity;
       }
     }
-    Serial.print("Position: ");
-    Serial.println(getValue());
+    Serial.print("counter: ");
+    Serial.println(counter);
   }
   previousState = currentState ;
 }
 //===================================================================
 int RotaryEncoder::getValue()
 {
+  Serial.print("counter: ");
+  Serial.println(clamp(counter / sensitivity));
   return clamp(counter / sensitivity);
 }
 //===================================================================
