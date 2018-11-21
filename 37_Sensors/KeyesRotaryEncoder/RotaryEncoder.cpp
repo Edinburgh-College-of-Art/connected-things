@@ -18,6 +18,8 @@ void RotaryEncoder::setup()
 {
   pinMode (pinA, INPUT);
   pinMode (pinB, INPUT);
+  pinMode (buttonPin, INPUT);
+  
   if (!Serial)
   {
     Serial.begin (9600);
