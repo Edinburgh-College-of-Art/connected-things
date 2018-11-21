@@ -2,10 +2,11 @@
 #include "RotaryEncoder.h"
 //===================================================================
 
-RotaryEncoder::RotaryEncoder(uint8_t pin1, uint8_t pin2, int minimum, int maximum, uint8_t sensitive)
+RotaryEncoder::RotaryEncoder(uint8_t pin1, uint8_t pin2, uint8_t butPin, int minimum, int maximum, uint8_t sensitive)
 {
   pinA = pin1;
   pinB = pin2;
+  buttonPin = butPin;
 
   min = minimum;
   max = maximum;
@@ -49,14 +50,14 @@ void RotaryEncoder::update()
     }
     Serial.print("counter: ");
     Serial.println(counter);
+    Serial.print("Value: ");
+    Serial.println(clamp(counter / sensitivity));
   }
   previousState = currentState ;
 }
 //===================================================================
 int RotaryEncoder::getValue()
 {
-  Serial.print("counter: ");
-  Serial.println(clamp(counter / sensitivity));
   return clamp(counter / sensitivity);
 }
 //===================================================================
@@ -72,4 +73,9 @@ int RotaryEncoder::clamp(int input)
     out = max;
   }
   return out;
+}
+//===================================================================
+bool RotaryEncoder::isButtonPressed()
+{
+  return digitalRead(buttonPin);
 }
