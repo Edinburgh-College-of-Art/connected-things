@@ -26,6 +26,7 @@ class RotaryEncoder
     bool previousState;
     uint8_t pinA;
     uint8_t pinB;
+    uint8_t buttonPin;
     uint8_t sensitivity;
     int min;
     int max;
