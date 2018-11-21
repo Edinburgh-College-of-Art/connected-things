@@ -77,7 +77,7 @@ int RotaryEncoder::clamp(int input)
   return out;
 }
 //===================================================================
-bool RotaryEncoder::isButtonPressed()
+bool RotaryEncoder::buttonPressed()
 {
-  return digitalRead(buttonPin);
+  return !digitalRead(buttonPin);
 }
