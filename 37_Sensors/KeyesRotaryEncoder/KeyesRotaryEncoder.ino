@@ -1,7 +1,13 @@
 //====================================================================
 #include "RotaryEncoder.h"
 //====================================================================
-RotaryEncoder encoder(5, 6, 7, 0, 60, 5);
+int clk = 5;
+int dat = 6;
+int sw  = 7;
+int minVal = 0;
+int maxVal = 60;
+int sens = 5;
+RotaryEncoder encoder(clk, dat, sw, minVal, maxVal, sens);
 //===================================================================
 void setup()
 {

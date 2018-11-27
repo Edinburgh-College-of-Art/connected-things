@@ -2,10 +2,10 @@
 #include "RotaryEncoder.h"
 //===================================================================
 
-RotaryEncoder::RotaryEncoder(uint8_t pin1, uint8_t pin2, uint8_t butPin, int minimum, int maximum, uint8_t sensitive)
+RotaryEncoder::RotaryEncoder(uint8_t clk, uint8_t dat, uint8_t butPin, int minimum, int maximum, uint8_t sensitive)
 {
-  pinA = pin1;
-  pinB = pin2;
+  pinA = clk;
+  pinB = dat;
   buttonPin = butPin;
 
   min = minimum;
@@ -79,5 +79,6 @@ int RotaryEncoder::clamp(int input)
 //===================================================================
 bool RotaryEncoder::buttonPressed()
 {
+  
   return !digitalRead(buttonPin);
 }

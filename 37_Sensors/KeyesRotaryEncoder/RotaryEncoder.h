@@ -9,7 +9,7 @@ class RotaryEncoder
     //===================================================================
     // Methods
     //===================================================================
-    RotaryEncoder(uint8_t pin1, uint8_t pin2, uint8_t butPin, int minimum, int maximum, uint8_t sensitive);
+    RotaryEncoder(uint8_t clk, uint8_t dat, uint8_t butPin, int minimum, int maximum, uint8_t sensitive);
     //===================================================================
     void setup();
     //===================================================================
@@ -22,7 +22,7 @@ class RotaryEncoder
     // clamp a value to the given min and max of the object
     int clamp(int input);
     //===================================================================
-    bool isButtonPressed();
+    bool buttonPressed();
   private:
     int counter = 0;
     bool previousState;
