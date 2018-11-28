@@ -12,7 +12,8 @@ unsigned int minMicroDelay = 1e6 / (bytesPerSec * numberSize); // the shortest w
 unsigned int winSize = 20; // size of averaging window
 MovingAverageFilter filter(winSize); 
 //====================================================================================
-
+int axmin = 0;
+int axmax = 1024;
 void setup()
 {
   Serial.begin(baud);
@@ -24,32 +25,29 @@ void setup()
 
 void loop()
 {
-  int x = random(1024);
+  int x = random(300,700);
   //--------------------------------------------------------------------------------------------
-  Serial.print(random(300,700)); // blue
-  delayMicroseconds(minMicroDelay); // we ideally need to wait this period of time before sending something else to serial
-
-  Serial.print(","); // need a space, comma, semicolon something to delimit the numbers coming in
-  delayMicroseconds(minMicroDelay);
-  //--------------------------------------------------------------------------------------------
-  Serial.print(filter.process(x)); // averaged random noise (red)
-  delayMicroseconds(minMicroDelay); // we ideally need to wait this period of time before sending something else to serial
-
-  Serial.print(","); // need a space, comma, semicolon something to delimit the numbers coming in
+  Serial.print(x); 
+  delayMicroseconds(minMicroDelay); 
+  Serial.print(","); 
   delayMicroseconds(minMicroDelay);
   //--------------------------------------------------------------------------------------------
-  Serial.print(1024); // blue
-  delayMicroseconds(minMicroDelay); // we ideally need to wait this period of time before sending something else to serial
-
-  Serial.print(","); // need a space, comma, semicolon something to delimit the numbers coming in
+  Serial.print(filter.process(x)); 
+  delayMicroseconds(minMicroDelay); 
+  Serial.print(","); 
   delayMicroseconds(minMicroDelay);
-
-  Serial.print(0); // blue
-  delayMicroseconds(minMicroDelay); // we ideally need to wait this period of time before sending something else to serial
-
-  Serial.print(","); // need a space, comma, semicolon something to delimit the numbers coming in
+  //--------------------------------------------------------------------------------------------
+  Serial.print(axmax); 
+  delayMicroseconds(minMicroDelay); 
+  Serial.print(","); 
   delayMicroseconds(minMicroDelay);
-  Serial.println(512); // centre line (green)
+//--------------------------------------------------------------------------------------------
+  Serial.print(axmin); 
+  delayMicroseconds(minMicroDelay); 
+  Serial.print(","); 
+  delayMicroseconds(minMicroDelay);
+  //--------------------------------------------------------------------------------------------  
+  Serial.println(512); 
   delayMicroseconds(minMicroDelay);
   //--------------------------------------------------------------------------------------------
 }
