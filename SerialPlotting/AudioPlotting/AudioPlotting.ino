@@ -1,7 +1,7 @@
 /*
-  Read a microphone at a fixed sampling rate and print out the audio signal, the filtered signal
-  and a reference line
-*/
+ * Read a microphone at a fixed sampling rate and print out the audio signal, the filtered signal 
+ * and a reference line   
+ */
 #include "MovingAverageFilter.h"
 //========================================================================
 const uint16_t sampleRate = 44100;
