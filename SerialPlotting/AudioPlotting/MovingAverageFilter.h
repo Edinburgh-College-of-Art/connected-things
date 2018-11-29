@@ -28,7 +28,7 @@ class MovingAverageFilter
 
       @returns averaged value given the new data point and current window state
     */
-    int process(int data);
+    int process(unsigned long long data);
     /*!
       @brief  get the last average calculated by the moving average window     
 
@@ -39,7 +39,7 @@ class MovingAverageFilter
     //--------------------------------------------------------------------------
     // Members
     uint8_t windowSize;       // size of the moving average window. Assuming there is not a window size > 255
-    int* window;              // The moving average window buffer
+    unsigned long long* window;              // The moving average window buffer
     uint8_t currentIndex = 0; // current index to which we will write to the buffer.
     int average = 0;          // averaged value from window
 };

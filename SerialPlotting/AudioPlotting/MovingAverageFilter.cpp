@@ -4,7 +4,7 @@
 MovingAverageFilter::MovingAverageFilter(const uint8_t sizeOfWindow)
 {
   windowSize = sizeOfWindow;
-  window = new int[windowSize];
+  window = new unsigned long long[windowSize];
   for (int i = 0; i < windowSize; ++i)
   {
     window[i] = 0;
@@ -16,7 +16,7 @@ MovingAverageFilter::~MovingAverageFilter()
   delete[] window;
 }
 //==============================================================================
-int MovingAverageFilter::process(int data)
+int MovingAverageFilter::process(unsigned long long data)
 {
   window[currentIndex] = data;
   average = 0;
