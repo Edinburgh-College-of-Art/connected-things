@@ -38,9 +38,9 @@ class MovingAverageFilter
   private:
     //--------------------------------------------------------------------------
     // Members
-    uint8_t windowSize;       // size of the moving average window. Assuming there is not a window size > 255
-    unsigned long long* window;              // The moving average window buffer
-    uint8_t currentIndex = 0; // current index to which we will write to the buffer.
-    int average = 0;          // averaged value from window
+    uint8_t windowSize;         // size of the moving average window. Assuming there is not a window size > 255
+    unsigned long long* window; // The moving average window buffer
+    uint8_t currentIndex = 0;   // current index to which we will write to the buffer.
+    int average = 0;            // averaged value from window
 };
 #endif

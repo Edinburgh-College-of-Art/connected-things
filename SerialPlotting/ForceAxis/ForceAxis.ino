@@ -10,7 +10,7 @@ unsigned int numberSize = sizeof(int); // how many bytes is a number
 unsigned int minMicroDelay = 1e6 / (bytesPerSec * numberSize); // the shortest we can wait before sending the next message
 //====================================================================================
 unsigned int winSize = 20; // size of averaging window
-MovingAverageFilter filter(winSize); 
+MovingAverageFilter filter(winSize);
 //====================================================================================
 int axmin = 0;
 int axmax = 1024;
@@ -25,29 +25,29 @@ void setup()
 
 void loop()
 {
-  int x = random(300,700);
+  int x = random(300, 700);
   //--------------------------------------------------------------------------------------------
-  Serial.print(x); 
-  delayMicroseconds(minMicroDelay); 
-  Serial.print(","); 
+  Serial.print(x);
   delayMicroseconds(minMicroDelay);
-  //--------------------------------------------------------------------------------------------
-  Serial.print(filter.process(x)); 
-  delayMicroseconds(minMicroDelay); 
-  Serial.print(","); 
+  Serial.print(",");
   delayMicroseconds(minMicroDelay);
   //--------------------------------------------------------------------------------------------
-  Serial.print(axmax); 
-  delayMicroseconds(minMicroDelay); 
-  Serial.print(","); 
+  Serial.print(filter.process(x));
   delayMicroseconds(minMicroDelay);
-//--------------------------------------------------------------------------------------------
-  Serial.print(axmin); 
-  delayMicroseconds(minMicroDelay); 
-  Serial.print(","); 
+  Serial.print(",");
   delayMicroseconds(minMicroDelay);
-  //--------------------------------------------------------------------------------------------  
-  Serial.println(512); 
+  //--------------------------------------------------------------------------------------------
+  Serial.print(axmax);
+  delayMicroseconds(minMicroDelay);
+  Serial.print(",");
+  delayMicroseconds(minMicroDelay);
+  //--------------------------------------------------------------------------------------------
+  Serial.print(axmin);
+  delayMicroseconds(minMicroDelay);
+  Serial.print(",");
+  delayMicroseconds(minMicroDelay);
+  //--------------------------------------------------------------------------------------------
+  Serial.println(512);
   delayMicroseconds(minMicroDelay);
   //--------------------------------------------------------------------------------------------
 }
