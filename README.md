@@ -16,7 +16,7 @@ Code related to connecting to communicating with ThingSpeak. Make sure to downlo
 
 ### IFTTT
 
-If this then that webhook examples.
+[If this then that webhook examples](https://arduinodiy.wordpress.com/2018/01/03/ifttt-webhooks/).
 
 ### JSON
 
