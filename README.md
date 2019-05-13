@@ -14,6 +14,10 @@ Code relating to using the Adafruit Feather M0 micro-controller.
 
 Code related to connecting to communicating with ThingSpeak. Make sure to download the ThingSpeak library in the Arduino IDE
 
+### IFTTT
+
+If this then that webhook examples.
+
 ### Web Server
 
 Code relating to setting the Feather M0 as web server, serving html webpages and providing a wireless access point.
@@ -39,3 +43,5 @@ Similar to the Keyestudio sensors, this relates to examples of using the SEEED S
 ## Neo Pixels
 
 Reference for using the Adafruit addressable LEDs NeoPixels.
+
+* * *
