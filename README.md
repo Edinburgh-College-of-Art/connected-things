@@ -26,6 +26,8 @@ Download the [Adafruit ZeroTimer Library](https://github.com/adafruit/Adafruit_Z
 
 Code relating to using the [Keyestudio 37 sensor kit](https://wiki.keyestudio.com/Ks0068_keyestudio_37_in_1_Sensor_Kit_for_Arduino_Starters#kesestudio_37_in_1_Sensor_Kit_for_Arduino_Starters). [Documentation is already available elsewhere](https://www.instructables.com/id/Arduino-37-in-1-Sensors-Kit-Explained/), so the example contained in this repository focus on best practice and clarity in coding.
 
+For the IR sensors, we recommend using the [IRRemote Library](http://z3t0.github.io/Arduino-IRremote/) available through the Arduino IDE library manager.
+
 ## Grove Sensors
 
 Similar to the Keyestudio sensors, this relates to examples of using the SEEED Studio range of grove sensors.
