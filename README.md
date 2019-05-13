@@ -18,6 +18,10 @@ Code related to connecting to communicating with ThingSpeak. Make sure to downlo
 
 If this then that webhook examples.
 
+### JSON
+
+[Say hello to JSON isaacs](https://raw.githubusercontent.com/keikoro/isaacs.JSON/master/isaacs.JSON)
+
 ### Web Server
 
 Code relating to setting the Feather M0 as web server, serving html webpages and providing a wireless access point.
