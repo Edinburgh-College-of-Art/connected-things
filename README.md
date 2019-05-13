@@ -8,7 +8,11 @@ Code resources for Product Design: Connected Things course
 
 ## Feather M0
 
-Code relating to using the Adafruit Feather M0 micro-controller.
+[Code relating to using the Adafruit Feather M0 micro-controller.](https://learn.adafruit.com/adafruit-feather-m0-wifi-atwinc1500/)
+
+### Setup
+
+Visit Adafruit for comprehensive setup instructions for the Feather M0
 
 ### Thing Speak
 
@@ -31,6 +35,12 @@ Code relating to setting the Feather M0 as web server, serving html webpages and
 Code demonstrating how to use the timers available on the Feather M0. This differs from the approach you would take if using an Arduino Uno, but the code has been structured in such a way that you shouldn't have to worry to much about what is happening under-the-hood. Timer interrupts are used to make actions happen at regular intervals. This means that you won't be able to use the `delay()` function.
 
 Download the [Adafruit ZeroTimer Library](https://github.com/adafruit/Adafruit_ZeroTimer) for greater control.
+
+* * *
+
+## Feather ESP8266
+
+[Visit Adafruit for comprehensive setup instructions for the Feather ESP8266](https://learn.adafruit.com/adafruit-feather-huzzah-esp8266/using-arduino-ide)
 
 * * *
 
