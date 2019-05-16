@@ -8,7 +8,9 @@ Code resources for Product Design: Connected Things course
 
 ## Feather M0
 
-[Code relating to using the Adafruit Feather M0 micro-controller.](https://learn.adafruit.com/adafruit-feather-m0-wifi-atwinc1500/)
+Code relating to using the Adafruit Feather M0 ATWINC1500 micro-controller.
+
+[Visit Adafruit for comprehensive setup instructions for the Feather M0](https://learn.adafruit.com/adafruit-feather-m0-wifi-atwinc1500/)
 
 ### Setup
 
@@ -38,11 +40,19 @@ Download the [Adafruit ZeroTimer Library](https://github.com/adafruit/Adafruit_Z
 
 * * *
 
-## Feather ESP8266
+## Feather HUZZAH
+
+Code relating to using the Adafruit Feather HUZZAH ESP8266 micro-controller.
 
 [Visit Adafruit for comprehensive setup instructions for the Feather ESP8266](https://learn.adafruit.com/adafruit-feather-huzzah-esp8266/using-arduino-ide)
 
 * * *
+
+## OLED Feather Wing
+
+Code relating to using the Adafruit OLED Feather wing.
+
+[Visit Adafruit for comprehensive setup instructions for the OLED Feather Wing](https://learn.adafruit.com/adafruit-oled-featherwing?view=all)
 
 ## 37 Sensors
 
