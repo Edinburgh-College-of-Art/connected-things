@@ -15,3 +15,5 @@
   - copy read API Key and paste into `String channelReadApiKey`
   - go to channel settings
   - copy ChannelID and paste into `String channelId`
+
+This example also uses the MQTT by Joël Gähwiler. Download this through the Arduino IDE `Tools | Manage Libraries`.
