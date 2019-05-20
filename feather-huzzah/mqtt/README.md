@@ -17,3 +17,8 @@
   - copy ChannelID and paste into `String channelId`
 
 This example also uses the MQTT by Joël Gähwiler. Download this through the Arduino IDE `Tools | Manage Libraries`.
+
+
+### simple-mqtt-subscribe
+
+For this sketch, download the Arduino MQTTClient library: `Tools | Manage Libraries`.
