@@ -33,12 +33,19 @@ void showWifiDetails()
   display.setCursor(0, 0);
   display.print("Connecting to SSID\n`adafruit':");
   display.print("connected!");
-  display.println("IP: 10.0.1.23");
-  display.println("Sending val #0");
+  display.print("IP: ");
+  display.print(WiFi.localIP());  
   display.setCursor(0, 0);
   display.display(); // actually display all of the above
 }
 
+void connectingMessage()
+{
+  display.setCursor(0, 0);
+  display.print("Connecting to SSID:\n");
+  display.println(ssid);  
+  display.setCursor(0, 0);
+}
 //---------------------------------------------------------
 
 void clearScreen()
