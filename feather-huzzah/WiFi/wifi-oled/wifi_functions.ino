@@ -16,7 +16,7 @@ void connectToWifi(const char* ssid, const char* password)
   display.setCursor(0, 0);
   display.print("Connnected!");
   display.setCursor(0, 0);
-  
+  display.display();
   Serial.println("");
   Serial.println("WiFi connected");
   Serial.println("IP address: ");

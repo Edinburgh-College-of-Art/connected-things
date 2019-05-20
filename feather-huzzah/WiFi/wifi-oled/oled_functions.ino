@@ -8,31 +8,18 @@ void setupOLED()
   // Show image buffer on the display hardware.
   // Since the buffer is intialized with an Adafruit splashscreen
   // internally, this will display the splashscreen.
+  clearScreen();
   display.display();
 }
 
-//---------------------------------------------------------
-
-void showTestDisplay()
-{  
-  display.setTextSize(1); 
-  display.setTextColor(WHITE);
-  display.setCursor(0, 0);
-  display.print("Connecting to SSID\n`adafruit':");
-  display.print("connected!");
-  display.println("IP: 10.0.1.23");
-  display.println("Sending val #0");
-  display.setCursor(0, 0);
-  display.display(); // actually display all of the above
-}
 //---------------------------------------------------------
 void showWifiDetails()
 {  
   display.setTextSize(1); 
   display.setTextColor(WHITE);
   display.setCursor(0, 0);
-  display.print("Connecting to SSID\n`adafruit':");
-  display.print("connected!");
+  display.print("SSID: ");
+  display.println(ssid);
   display.print("IP: ");
   display.print(WiFi.localIP());  
   display.setCursor(0, 0);
@@ -45,6 +32,7 @@ void connectingMessage()
   display.print("Connecting to SSID:\n");
   display.println(ssid);  
   display.setCursor(0, 0);
+  display.display();
 }
 //---------------------------------------------------------
 
