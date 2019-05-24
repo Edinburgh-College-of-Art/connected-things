@@ -80,6 +80,9 @@ Reference for using the Adafruit addressable LEDs NeoPixels.
 
 ### MQTT
 
+- [Public MQTT Brokers](https://github.com/mqtt/mqtt.github.io/wiki/public_brokers)
+- [Public MQTT Brokers](http://moxd.io/2015/10/17/public-mqtt-brokers/)
+
 #### ThingSpeak
 
 - go to [ThingSpeak](https://thingspeak.com/)
