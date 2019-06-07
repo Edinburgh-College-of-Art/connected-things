@@ -42,3 +42,18 @@ void clearScreen()
   display.clearDisplay();
   display.display();
 }
+
+//---------------------------------------------------------
+
+void clearLine(byte line)
+{
+  line *= 8;
+  for (int i = 0; i < 128; ++i)
+  {
+    for (int j = 0; j < 7; ++j)
+    {
+      display.drawPixel(i, line + j, BLACK);
+    }
+  }
+  display.display();
+}
