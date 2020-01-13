@@ -9,8 +9,8 @@
 #include <ArduinoJson.h>
 //------------------------------------------------------------------------------
 // API Details
-const String DarkSkyAPIKey = "ENTERAPIKEY";
-String weatherLocation = "Edinburgh UK";
+const String DarkSkyAPIKey = "DARKSKYAPIKEY";
+String weatherLocation[] = {"Edinburgh UK", "London UK", "Tokyo"};
 //------------------------------------------------------------------------------
 // WiFi Details
 const char* ssid     = "SSID";
@@ -18,13 +18,26 @@ const char* password = "PASSWORD";
 WiFiClient client;
 WiFiSSLClient sslClient;
 //------------------------------------------------------------------------------
+Servo myservo;
+void servoFunction(bool val) 
+{
+  myservo.write((val) ? 0 : 90);
+}
+//------------------------------------------------------------------------------
 void setup()
 {
+  myservo.attach(9);
   Serial.begin(9600);
   while (!Serial) {};
   connectToWifiNetwork(ssid, password);
-  Serial.println("will it rain?");
-  Serial.println((itIsGoingToRain(weatherLocation)) ? "yes" : "no");
+  
+  for (int i = 0; i < 3; i++)
+  {
+    Serial.println("will it rain in:");
+    Serial.println(weatherLocation[i] + "?");
+    servoFunction(itIsGoingToRain(weatherLocation[i]));
+    delay(2000);
+  }
 
 }
 //------------------------------------------------------------------------------

@@ -3,10 +3,10 @@ String getLatLong(String location)
   //----------------------------------------------------------------------------
   location = urlencode(location);
   String geoHost = "geocode.xyz";
-  String geoURL  = "/" + location + "?json=1"; 
+  String geoURL  = "/" + location + "?json=1";
   //----------------------------------------------------------------------------
   String LatLongPayload = getJson(geoHost, geoURL, 80, false); // Get Lat Long
-//  Serial.println(LatLongPayload);
+  //  Serial.println(LatLongPayload);
   //----------------------------------------------------------------------------
   DynamicJsonDocument jsonBuffer(512);
   deserializeJson(jsonBuffer, LatLongPayload);
@@ -34,10 +34,10 @@ String getWeather (String lat, String lng)
 String getLatLngWeather(String latLong)
 {
   String unixTime = getCurrentUnixTime();
-//  Serial.println("unix time: " + unixTime);
+  //  Serial.println("unix time: " + unixTime);
   unsigned long unixTimeLong = atol(unixTime.c_str()) + 10000;
   String finalUnixTime = String(unixTimeLong);
-//  Serial.println(finalUnixTime);
+  //  Serial.println(finalUnixTime);
 
   String weatherHost = "api.darksky.net";
   String weatherURL = "/forecast/" +
@@ -45,9 +45,9 @@ String getLatLngWeather(String latLong)
                       latLong + "," +
                       finalUnixTime +
                       "?exclude=minutely,flags,hourly,currently,alerts";
-//  Serial.println("Weather URL: " + weatherHost + weatherURL);
+  //  Serial.println("Weather URL: " + weatherHost + weatherURL);
   String weatherPayload = getJson(weatherHost, weatherURL, 443, false); // Get Weather
-//  Serial.println(weatherPayload);
+  //  Serial.println(weatherPayload);
   return weatherPayload;
 }
 
@@ -63,14 +63,12 @@ String getCurrentUnixTime()
 //------------------------------------------------------------------------------
 bool itIsGoingToRain(String location)
 {
-    String WeatherJSON = getWeather(location);
-
-
+  String WeatherJSON = getWeather(location);
+  
   DynamicJsonDocument jsonBufferWeather(2048);
   deserializeJson(jsonBufferWeather, WeatherJSON);
-
   JsonObject weatherRoot = jsonBufferWeather.as<JsonObject>();
-
+  
   String iconWeather = weatherRoot["daily"]["data"][0]["icon"];
   Serial.println(iconWeather);
 
@@ -81,8 +79,6 @@ bool itIsGoingToRain(String location)
   return (iconWeather == rainIcon  ||
           iconWeather == sleetIcon ||
           iconWeather == snowIcon) ? true : false;
-  //  return false;
-
 }
 //------------------------------------------------------------------------------
 String urlencode(String str)
@@ -96,7 +92,7 @@ String urlencode(String str)
     c = str.charAt(i);
     if (c == ' ')
     {
-      encodedString += "%20";      
+      encodedString += "%20";
     }
     else if (isalnum(c))
     {
