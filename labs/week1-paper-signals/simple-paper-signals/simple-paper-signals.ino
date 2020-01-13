@@ -10,7 +10,8 @@
 //------------------------------------------------------------------------------
 // API Details
 const String DarkSkyAPIKey = "DARKSKYAPIKEY";
-String weatherLocation[] = {"Edinburgh UK", "London UK", "Tokyo"};
+const int numberOfLocations = 3;
+String weatherLocation[numberOfLocations] = {"Edinburgh UK", "London UK", "Tokyo"};
 //------------------------------------------------------------------------------
 // WiFi Details
 const char* ssid     = "SSID";
@@ -19,7 +20,7 @@ WiFiClient client;
 WiFiSSLClient sslClient;
 //------------------------------------------------------------------------------
 Servo myservo;
-void servoFunction(bool val) 
+void servoFunction(bool val)
 {
   myservo.write((val) ? 0 : 90);
 }
@@ -30,19 +31,16 @@ void setup()
   Serial.begin(9600);
   while (!Serial) {};
   connectToWifiNetwork(ssid, password);
-  
-  for (int i = 0; i < 3; i++)
+}
+//------------------------------------------------------------------------------
+void loop()
+{
+  for (int i = 0; i < numberOfLocations; i++)
   {
     Serial.println("will it rain in:");
     Serial.println(weatherLocation[i] + "?");
     servoFunction(itIsGoingToRain(weatherLocation[i]));
     delay(2000);
   }
-
-}
-//------------------------------------------------------------------------------
-void loop()
-{
-
   delay(5000); // look to update every 5 seconds
 }
