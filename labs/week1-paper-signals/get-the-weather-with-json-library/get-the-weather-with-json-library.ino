@@ -9,10 +9,14 @@ String yourApiKey = "";
 String host = "api.darksky.net";
 String url = "/forecast/" + yourApiKey + "/55.94100,-3.20356,1578665400?exclude=minutely,flags,hourly,currently,alerts";
 //----------------------------------------------------------------------------
+// WiFi Details
+const char* ssid     = "SSID";
+const char* password = "PASSWORD";
 WiFiSSLClient client;
 //----------------------------------------------------------------------------
 void setup()
 {
+  connectToWifiNetwork(ssid, password);
   //----------------------------------------------------------------------------
   // connect to API
   if (client.connect(host.c_str(), 443))
