@@ -1,24 +1,33 @@
 //Setting up a WiFi connection - COMPLETE
 
-void connectToWifi(const char ssidName[], const char pass[]) {
-  Serial.begin(9600); // open the Serial port and set the baud rate (communication speed)
-  while (!Serial) {} // wait until the Serial port is open
-  
+void connectToWifi(const char ssidName[], const char pass[]) 
+{  
 #ifdef ARDUINO_SAMD_ZERO
-  WiFi.setPins(8, 7, 4, 2); // Set the WiFi pins on the Feather – you can skip this step if using the IoT 33 Nano
+  WiFi.setPins(8, 7, 4, 2); // Set the WiFi pins on the Feather 
 #endif
 
-  Serial.println("Starting..."); // Print a message to the Serial so you can monitor what's going on
+  Serial.println("Starting...");
   Serial.println("Connecting to WiFi.");
 
-  int conn = WiFi.begin(ssidName, pass); // connect to the WiFi network, passing in the values for the network name and password
+  int conn = WiFi.begin(ssidName, pass); 
 
-  if (conn == WL_CONNECTED) { // Check if you have successfully connected to the WiFi network
-    Serial.println("OK!"); // If connected print a confirmation message to the Serial
-  } else if (conn == WL_IDLE_STATUS) { // If you've not connected successfully print an error message
+  if (conn == WL_CONNECTED) 
+  { 
+    Serial.println("OK!");
+  } 
+  else if (conn == WL_IDLE_STATUS) 
+  { 
     Serial.println("Idle");
-  } else {
+  } 
+  else 
+  {
     Serial.println("Unknown response");
   }
 
+}
+
+void haltFirmare()
+{
+  Serial.println("STOPPING THE PROGRAM");
+  while(true){}
 }
