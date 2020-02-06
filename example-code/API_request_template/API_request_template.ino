@@ -36,18 +36,18 @@
 #include <ArduinoJson.h>
 //---------------------------------------------------------------------------------------------------------------------------------------
 // WiFi Connection
-const char* ssid = "SSID";          // If you are not at ECA, replace these with the name and password for your local wi-fi network
+const char* ssid = "SSID";          // replace these with the name and password for your local wi-fi network
 const char* password = "PASSWORD";
 //---------------------------------------------------------------------------------------------------------------------------------------
 // API
-String host = "api.carbonintensity.org.uk"; // Create a string to hold the name of the host you are connecting to
-String url = "/intensity/date";             // create a string to hold your HTTP request URL
+String host = "api.carbonintensity.org.uk";
+String url = "/intensity/date";            
 
 //---------------------------------------------------------------------------------------------------------------------------------------
 // WiFi Client
-WiFiSSLClient sslClient;     // Create a new WiFi SSL Client – this will give us a secure connection (https) to Dark Sky through port 443
-WiFiClient client;     // Create a new WiFi SSL Client – this will give us a secure connection (https) to Dark Sky through port 443
-char httpResponse[10000]; // If you are getting responses larger that 10kB, may be use another request.
+WiFiSSLClient sslClient;  // HTTPS
+WiFiClient client;        // HTTP
+char httpResponse[10000]; // If you are getting responses larger that 10kB, use another request.
 //---------------------------------------------------------------------------------------------------------------------------------------
 // Timer 
 unsigned long updateTimer = 300000;
