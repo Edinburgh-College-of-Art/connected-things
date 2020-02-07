@@ -62,7 +62,8 @@ void setup()
   JsonObject json = makeAPIcall(host, url, sslClient, 443);
   
   String someData = json["data"][0]["intensity"]["forecast"]; // This will change depending on the API of course
-  Serial.println(someData);
+ 
+  Serial.println("\n\nSome Data: ");Serial.println(someData);
   Serial.println("Now Get to Work!");
   haltFirmware();
 }

@@ -159,4 +159,5 @@ void printHttpResponse(unsigned int charCount)
   {
     Serial.print(httpResponse[i]);
   }
+  Serial.println();
 }
