@@ -1,30 +1,35 @@
-unsigned int makeGetRequest(String &host, String &url)
+unsigned int makeGetRequest(String &host, String &url, Client &httpClient, int port, bool &chunked)
 {
   Serial.println("https://" + host + url);
   unsigned int contentLength;
-  bool chunked = false;
-  if (client.connect(host.c_str(), 80))
+  chunked = false;
+
+  if (httpClient.connect(host.c_str(), port))
   {
     Serial.println("Connecting to carbon intensity.");
-    client.println("GET " + url + " HTTP/1.1");
-    client.println("Host: " + host);
-    client.println("Connection: close");
-    client.println();
+    httpClient.println("GET " + url + " HTTP/1.1");
+    httpClient.println("Host: " + host);
+    httpClient.println("Connection: close");
+    httpClient.println();
   }
-  Serial.println(client.available());
-  while (client.connected())
+  else
   {
-    String line = client.readStringUntil('\n');
+    Serial.println("Connection Failed; check:\n\t- did WiFi Connect?\n\t- is the site is HTTPS?\n\t- have you used the correct client?\n\t- have you selected the correct port?\n");
+    haltFirmware();
+  }
+
+  while (httpClient.connected())
+  {
+    String line = httpClient.readStringUntil('\n');
     Serial.println(line);
     if (line.startsWith("Content-Length: "))
     {
       contentLength = getContentLength(line);
-      chunked = true;
     }
     else if (line.startsWith("Transfer-Encoding: chunked"))
     {
       Serial.println("WARNING CHUNKED ENCODING: Email the lecturer");
-      haltFirmware();
+      chunked = true;
     }
     else if (line == "\r")
     {
@@ -34,41 +39,32 @@ unsigned int makeGetRequest(String &host, String &url)
   return contentLength;
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------
-
-unsigned int makeSSLGetRequest(String &host, String &url)
+JsonObject makeAPIcall(String & host, String & url, Client &httpClient, int port)
 {
-  Serial.println("https://" + host + url);
-  unsigned int contentLength;
   bool chunked = false;
-  if (sslClient.connectSSL(host.c_str(), 443))
+  int contentLength = makeGetRequest(host, url, httpClient, port, chunked);
+  unsigned int charCount;
+  if (chunked)
   {
-    Serial.println("Connecting to carbon intensity.");
-    sslClient.println("GET " + url + " HTTP/1.1");
-    sslClient.println("Host: " + host);
-    sslClient.println("Connection: close");
-    sslClient.println();
+    charCount = parseChunked(httpClient);
   }
-  Serial.println(sslClient.available());
-  while (sslClient.connected())
+  else if (contentLength > 10000)
   {
-    String line = sslClient.readStringUntil('\n');
-    Serial.println(line);
-    if (line.startsWith("Content-Length: "))
-    {
-      contentLength = getContentLength(line);
-    }
-    else if (line.startsWith("Transfer-Encoding: chunked"))
-    {
-      Serial.println("WARNING CHUNKED ENCODING: Email the lecturer");
-      //      haltFirmware();
-    }
-    else if (line == "\r")
-    {
-      break;
-    }
+    Serial.print("Your Content Length is: ");
+    Serial.println(contentLength);
+    Serial.println("Maybe use another request or API");
+    haltFirmware();
   }
-  return contentLength;
+  else
+  {
+    charCount = parseContent(contentLength, httpClient);
+  }
+
+  printHttpResponse(charCount);
+
+  DynamicJsonDocument buffer(charCount);
+  deserializeJson(buffer, httpResponse);
+  return buffer.as < JsonObject > ();
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------
@@ -78,117 +74,33 @@ unsigned int getContentLength(String line)
   return line.substring(16).toInt(); // This line prints out the response from Carbon Intensity to the Serial Monitor – this will let you know if your request was successful
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------
-JsonObject makeSSLAPIcall(String &host, String &url)
-{
-  unsigned int contentLength = makeSSLGetRequest(host, url);
-  bool chunked = true;
-  if (contentLength > 10000)
-  {
-    chunked = true;
-    Serial.print("Your Content Length is: ");
-    Serial.println(contentLength);
-    Serial.println("Maybe use another request or API");
-    //    haltFirmware();
-  }
-
-  unsigned int byteCounter = 0;
-  unsigned int charCounter = 0;
-
-  if (chunked)
-  {
-    parseChunked();
-  }
-  else
-  {
-    parseContent(contentLength);
-  }
-
-
-
-  Serial.print("\n DONE\n");
-  DynamicJsonDocument buffer(charCounter);
-  deserializeJson(buffer, httpResponse);
-  return buffer.as < JsonObject > ();
-}
 
 //---------------------------------------------------------------------------------------------------------------------------------------
 
-JsonObject makeAPIcall(String & host, String & url)
-{
-  unsigned int contentLength = makeGetRequest(host, url);
-
-  if (contentLength > 10000)
-  {
-    Serial.print("Your Content Length is: ");
-    Serial.println(contentLength);
-    Serial.println("Maybe use another request or API");
-    haltFirmware();
-  }
-
-  unsigned int byteCounter = 0;
-  unsigned int charCounter = 0;
-  while (true)
-  {
-    char t = client.read();
-
-    if (t != 255)
-    {
-      if (t != ' ' && t != '\r' && t != '\n')
-      {
-        httpResponse[charCounter] = t;
-        charCounter++;
-      }
-      byteCounter++;
-      if (byteCounter == contentLength)
-      {
-        Serial.println(byteCounter);
-        break;
-      }
-    }
-  }
-
-  for (int i = 0; i < charCounter; i++)
-  {
-    Serial.print(httpResponse[i]);
-  }
-
-
-  DynamicJsonDocument buffer(charCounter);
-  deserializeJson(buffer, httpResponse);
-  return buffer.as < JsonObject > ();
-}
-
-//---------------------------------------------------------------------------------------------------------------------------------------
-
-void parseChunked()
+unsigned int parseChunked(Client &httpClient)
 {
   char p = 0;
   unsigned int charCounter = 0;
 
-  String first = "";
+  String firstNumber = "";
 
-  while (first == "")
+  while (firstNumber == "")
   {
-    first = sslClient.readStringUntil('\n');
+    firstNumber = httpClient.readStringUntil('\n');
   }
-  
+
   while (true)
   {
-    // parse first number!!!!
-    char t = sslClient.read();
+    char t = httpClient.read();
     if (t != 255)
     {
-      Serial.print(t);
       if (p == '0')
       {
         if (t == 13)
         {
-          Serial.print("end");
           charCounter--;
           break;
         }
-
       }
       else
       {
@@ -207,18 +119,18 @@ void parseChunked()
     }
 
   }
-//  haltFirmware();
+  return charCounter;
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------
 
-void parseContent(unsigned int contentLength)
+unsigned int parseContent(unsigned int contentLength, Client &httpClient)
 {
   unsigned int byteCounter = 0;
   unsigned int charCounter = 0;
   while (true)
   {
-    char t = sslClient.read();
+    char t = httpClient.read();
 
     if (t != 255)
     {
@@ -234,5 +146,17 @@ void parseContent(unsigned int contentLength)
         break;
       }
     }
+  }
+  return charCounter;
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------
+
+
+void printHttpResponse(unsigned int charCount)
+{
+  for (int i = 0; i < charCount; i++)
+  {
+    Serial.print(httpResponse[i]);
   }
 }
