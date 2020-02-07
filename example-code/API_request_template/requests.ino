@@ -2,7 +2,7 @@ unsigned int makeGetRequest(String &host, String &url)
 {
   Serial.println("https://" + host + url);
   unsigned int contentLength;
-
+  bool chunked = false;
   if (client.connect(host.c_str(), 80))
   {
     Serial.println("Connecting to carbon intensity.");
@@ -19,11 +19,12 @@ unsigned int makeGetRequest(String &host, String &url)
     if (line.startsWith("Content-Length: "))
     {
       contentLength = getContentLength(line);
+      chunked = true;
     }
     else if (line.startsWith("Transfer-Encoding: chunked"))
     {
       Serial.println("WARNING CHUNKED ENCODING: Email the lecturer");
-      haltFirmare();
+      haltFirmware();
     }
     else if (line == "\r")
     {
@@ -33,12 +34,13 @@ unsigned int makeGetRequest(String &host, String &url)
   return contentLength;
 }
 
+//---------------------------------------------------------------------------------------------------------------------------------------
 
 unsigned int makeSSLGetRequest(String &host, String &url)
 {
   Serial.println("https://" + host + url);
   unsigned int contentLength;
-
+  bool chunked = false;
   if (sslClient.connectSSL(host.c_str(), 443))
   {
     Serial.println("Connecting to carbon intensity.");
@@ -59,7 +61,7 @@ unsigned int makeSSLGetRequest(String &host, String &url)
     else if (line.startsWith("Transfer-Encoding: chunked"))
     {
       Serial.println("WARNING CHUNKED ENCODING: Email the lecturer");
-      haltFirmare();
+      //      haltFirmware();
     }
     else if (line == "\r")
     {
@@ -80,41 +82,29 @@ unsigned int getContentLength(String line)
 JsonObject makeSSLAPIcall(String &host, String &url)
 {
   unsigned int contentLength = makeSSLGetRequest(host, url);
-
+  bool chunked = true;
   if (contentLength > 10000)
   {
+    chunked = true;
     Serial.print("Your Content Length is: ");
     Serial.println(contentLength);
     Serial.println("Maybe use another request or API");
-    haltFirmare();
+    //    haltFirmware();
   }
 
   unsigned int byteCounter = 0;
   unsigned int charCounter = 0;
-  while (true)
-  {
-    char t = sslClient.read();
 
-    if (t != 255)
-    {
-      if (t != ' ' && t != '\r' && t != '\n')
-      {
-        httpResponse[charCounter] = t;
-        charCounter++;
-      }
-      byteCounter++;
-      if (byteCounter == contentLength)
-      {
-        Serial.println(byteCounter);
-        break;
-      }
-    }
+  if (chunked)
+  {
+    parseChunked();
+  }
+  else
+  {
+    parseContent(contentLength);
   }
 
-  for (int i = 0; i < charCounter; i++)
-  {
-    Serial.print(httpResponse[i]);
-  }
+
 
   Serial.print("\n DONE\n");
   DynamicJsonDocument buffer(charCounter);
@@ -122,7 +112,9 @@ JsonObject makeSSLAPIcall(String &host, String &url)
   return buffer.as < JsonObject > ();
 }
 
-JsonObject makeAPIcall(String &host, String &url)
+//---------------------------------------------------------------------------------------------------------------------------------------
+
+JsonObject makeAPIcall(String & host, String & url)
 {
   unsigned int contentLength = makeGetRequest(host, url);
 
@@ -131,7 +123,7 @@ JsonObject makeAPIcall(String &host, String &url)
     Serial.print("Your Content Length is: ");
     Serial.println(contentLength);
     Serial.println("Maybe use another request or API");
-    haltFirmare();
+    haltFirmware();
   }
 
   unsigned int byteCounter = 0;
@@ -160,9 +152,87 @@ JsonObject makeAPIcall(String &host, String &url)
   {
     Serial.print(httpResponse[i]);
   }
-  
+
 
   DynamicJsonDocument buffer(charCounter);
   deserializeJson(buffer, httpResponse);
   return buffer.as < JsonObject > ();
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------
+
+void parseChunked()
+{
+  char p = 0;
+  unsigned int charCounter = 0;
+
+  String first = "";
+
+  while (first == "")
+  {
+    first = sslClient.readStringUntil('\n');
+  }
+  
+  while (true)
+  {
+    // parse first number!!!!
+    char t = sslClient.read();
+    if (t != 255)
+    {
+      Serial.print(t);
+      if (p == '0')
+      {
+        if (t == 13)
+        {
+          Serial.print("end");
+          charCounter--;
+          break;
+        }
+
+      }
+      else
+      {
+        if (t != ' ' && t != '\r' && t != '\n') // PARSE OUT last "0" from result
+        {
+          httpResponse[charCounter] = t;
+          charCounter++;
+          if (charCounter == 10000)
+          {
+            Serial.println("response is too large to parse");
+            haltFirmware();
+          }
+        }
+      }
+      p = t;
+    }
+
+  }
+//  haltFirmware();
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------
+
+void parseContent(unsigned int contentLength)
+{
+  unsigned int byteCounter = 0;
+  unsigned int charCounter = 0;
+  while (true)
+  {
+    char t = sslClient.read();
+
+    if (t != 255)
+    {
+      if (t != ' ' && t != '\r' && t != '\n')
+      {
+        httpResponse[charCounter] = t;
+        charCounter++;
+      }
+      byteCounter++;
+      if (byteCounter == contentLength)
+      {
+        Serial.println(byteCounter);
+        break;
+      }
+    }
+  }
 }
