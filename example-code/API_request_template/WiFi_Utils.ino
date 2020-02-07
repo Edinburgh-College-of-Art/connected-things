@@ -26,7 +26,7 @@ void connectToWifi(const char ssidName[], const char pass[])
 
 }
 
-void haltFirmare()
+void haltFirmware()
 {
   Serial.println("STOPPING THE PROGRAM");
   while(true){}
