@@ -28,6 +28,6 @@ void connectToWifi(const char ssidName[], const char pass[])
 
 void haltFirmware()
 {
-  Serial.println("STOPPING THE PROGRAM");
+  Serial.println("\n\nSTOPPING THE PROGRAM!");
   while(true){}
 }
