@@ -1,6 +1,7 @@
 unsigned int makeGetRequest(String &host, String &url, Client &httpClient, int port, bool &chunked)
 {
-  Serial.println("https://" + host + url);
+
+  Serial.println(((port == 443) ? ("https://") : ("http://")) + host + url);
   unsigned int contentLength;
   chunked = false;
 
@@ -14,7 +15,7 @@ unsigned int makeGetRequest(String &host, String &url, Client &httpClient, int p
   }
   else
   {
-    Serial.println("Connection Failed; check:\n\t- did WiFi Connect?\n\t- is the site is HTTPS?\n\t- have you used the correct client?\n\t- have you selected the correct port?\n");
+    Serial.println("Connection Failed; check:\n\t- did WiFi Connect?\n\t- is the site HTTPS?\n\t- have you used the correct client? v(WiFiClient or WiFiSSLClient)\n\t- have you selected the correct port? (80 or 443)\n");
     haltFirmware();
   }
 
@@ -48,7 +49,7 @@ JsonObject makeAPIcall(String & host, String & url, Client &httpClient, int port
   {
     charCount = parseChunked(httpClient);
   }
-  else if (contentLength > 10000)
+  else if (contentLength > CHARACTER_LIMIT)
   {
     Serial.print("Your Content Length is: ");
     Serial.println(contentLength);
@@ -98,17 +99,17 @@ unsigned int parseChunked(Client &httpClient)
       {
         if (t == 13)
         {
-          charCounter--;
+          charCounter--; // PARSE OUT last "0" from result
           break;
         }
       }
       else
       {
-        if (t != ' ' && t != '\r' && t != '\n') // PARSE OUT last "0" from result
+        if (t != ' ' && t != '\r' && t != '\n') 
         {
           httpResponse[charCounter] = t;
           charCounter++;
-          if (charCounter == 10000)
+          if (charCounter == CHARACTER_LIMIT)
           {
             Serial.println("response is too large to parse");
             haltFirmware();

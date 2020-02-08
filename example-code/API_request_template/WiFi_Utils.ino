@@ -21,7 +21,7 @@ void connectToWifi(const char ssidName[], const char pass[])
   } 
   else 
   {
-    Serial.println("Unknown response");
+    Serial.println("WiFi Connection Failed!");
   }
 
 }

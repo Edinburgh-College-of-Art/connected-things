@@ -34,6 +34,7 @@
 #endif
 
 #include <ArduinoJson.h>
+const unsigned int CHARACTER_LIMIT= 10000; // Limit of characters in HTTP response
 //---------------------------------------------------------------------------------------------------------------------------------------
 // WiFi Connection
 const char* ssid = "SSID";          // replace these with the name and password for your local wi-fi network
@@ -47,7 +48,7 @@ String url = "/intensity/date";
 // WiFi Client
 WiFiSSLClient sslClient;  // HTTPS
 WiFiClient client;        // HTTP
-char httpResponse[10000]; // If you are getting responses larger that 10kB, use another request.
+char httpResponse[CHARACTER_LIMIT]; // If you are getting responses larger that 10kB, use another request.
 //---------------------------------------------------------------------------------------------------------------------------------------
 // Timer 
 unsigned long updateTimer = 300000;
