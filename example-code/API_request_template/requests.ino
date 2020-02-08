@@ -6,8 +6,7 @@ unsigned int makeGetRequest(String &host, String &url, Client &httpClient, int p
   chunked = false;
 
   if (httpClient.connect(host.c_str(), port))
-  {
-    Serial.println("Connecting to carbon intensity.");
+  {    
     httpClient.println("GET " + url + " HTTP/1.1");
     httpClient.println("Host: " + host);
     httpClient.println("Connection: close");
