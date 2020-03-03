@@ -40,8 +40,8 @@
 const unsigned int CHARACTER_LIMIT= 10000; // Limit of characters in HTTP response
 //---------------------------------------------------------------------------------------------------------------------------------------
 // WiFi Connection
-const char* ssid = "Major Crimes";          // replace these with the name and password for your local wi-fi network
-const char* password = "The Bunk";
+const char* ssid = "YOUR_SSID";          // replace these with the name and password for your local wi-fi network
+const char* password = "YOUR_PASSWORD";
 //---------------------------------------------------------------------------------------------------------------------------------------
 // API
 String host = "raw.githubusercontent.com";
