@@ -2,8 +2,8 @@
 // The general format of the code will, however, work for any API you are requesting JSON data from
 // Note that accessing the World Time API does not require an API Key
 
-long getCurrentTime() {
-
+long getCurrentTime()
+{
   String host = "worldtimeapi.org"; // Create a String to hold the address of the server you want to connect to
   String url = "/api/timezone/Europe/London.json"; // Create a string to hold the URL for your GET Request
   const int port = 80; // Create an int to hold your Port Number – in this case we are using Port 80 for an unsecured connection
@@ -12,10 +12,10 @@ long getCurrentTime() {
   // The data will be returned as a String, which we then need to convert to a JSON Ojbect to parse
 
   /*First, create a new DynamicJson Document – the number that goes in the brackets here allocates memory on the Arduino for the data you download from the server
-    Make sure you allocate enough memory for the JSON you want to download or your Arduino will crash and you will need to manually reset it
-    To calculate the memory required, use your web browser to call the API by pasting your full GET request into the address bar,
-    and then copy and past the response you get into the ArduinoJson Assistant on this page: https://arduinojson.org/v6/assistant/
-    You can also use the ArduinoJson assistant to help you write code to parse your JSON – see pages 12 – 14 of the 'Parsing JSON' slides on Learn for an example */
+     Make sure you allocate enough memory for the JSON you want to download or your Arduino will crash and you will need to manually reset it
+     To calculate the memory required, use your web browser to call the API by pasting your full GET request into the address bar,
+     and then copy and past the response you get into the ArduinoJson Assistant on this page: https://arduinojson.org/v6/assistant/
+     You can also use the ArduinoJson assistant to help you write code to parse your JSON – see pages 12 – 14 of the 'Parsing JSON' slides on Learn for an example */
 
   DynamicJsonDocument jsonBuffer(500);
   deserializeJson(jsonBuffer, timeJson); // Next, copy the data in the String returned by the getJson function into a JSON Object

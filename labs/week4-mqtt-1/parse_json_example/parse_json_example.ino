@@ -2,7 +2,7 @@
 // It uses Dark Sky as an example, but the general structure of the code can be adapted for other APIs
 
 // Libraries -------------------------
-// First import the right WiFi library for your Arduino 
+// First import the right WiFi library for your Arduino
 #include <WiFiNINA.h> // use this for the Nano 33 IoT board
 //#include <WiFi101.h> // use this for the Feather M0
 #include <ArduinoJson.h> // import the Arduino Json library
@@ -16,18 +16,17 @@ WiFiSSLClient client; // create a new WiFiSSLClient – this is to allow you to 
 
 
 // SETUP -----------------------------
-void setup() {
-
+void setup()
+{
   Serial.begin(9600); // open the Serial port and set the baud rate (communication speed)
-  while (!Serial) {} // do nothing until the Serial port is open
+  while (!Serial)
+  {} // do nothing until the Serial port is open
 
   connectToWiFi(ssid, password); // connect to WiFi
   checkWeather(); // call the checkWeather function to get a weather forecast from Dark Sky (on checkWeather tab)
 
 }
-
 // LOOP -------------------------------
-void loop() { // Not used in this example
-  // put your main code here, to run repeatedly:
-
+void loop()  // Not used in this example
+{// put your main code here, to run repeatedly:
 }

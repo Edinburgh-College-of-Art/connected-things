@@ -1,7 +1,7 @@
 // This example demonstrates how to download JSON data from an API, parse values from the JSON,
 // and use these values to control the movement of a servo and the brightness of an LED
 
-// NOTE: to use this sketch you will need to replace the values for ssid, password, and darkSkyAPIkey (on checkWeather tab) with your own values 
+// NOTE: to use this sketch you will need to replace the values for ssid, password, and darkSkyAPIkey (on checkWeather tab) with your own values
 
 // Libraries -----------------------------------
 #include <WiFiNINA.h> // Use this WiFi library for the Nano 33 IoT board
@@ -37,8 +37,8 @@ long pTime = 0; // create a long to hold the time (in milliseconds) of your last
 
 
 // Setup --------------------------------------
-void setup() {
-
+void setup()
+{
   Serial.begin(9600); // open the Serial port and sent the baud rate (communication speed)
   while (!Serial) {} // do nothing until the Serial port is ready
 
@@ -52,13 +52,12 @@ void setup() {
   checkWeather(); // call the function that gets the weather forecast from Dark Sky (on checkWeather tab)
 
 }
-
-
 // Loop ---------------------------------------
-void loop() {
-
+void loop()
+{
   // millis() returns the time in milliseconds since the program first started running on the Arduino, see https://www.arduino.cc/reference/en/language/functions/time/millis/ for more info
-  if (millis() > pTime + timer) { // If the current time is greater than the combined value of millis() at the last time the API was called and that of the timer
+  if (millis() > pTime + timer)  // If the current time is greater than the combined value of millis() at the last time the API was called and that of the timer
+  {
     pTime = millis(); // Set pTime to equal the current value of millis() - this is keeping track of when the last API call was made
     checkWeather(); // Call the checkWeather function
   }

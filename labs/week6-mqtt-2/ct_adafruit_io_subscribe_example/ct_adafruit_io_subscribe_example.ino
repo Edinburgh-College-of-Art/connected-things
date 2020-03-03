@@ -18,7 +18,8 @@
 #pragma message "You are Using the IoT Nano 33"
 #include <WiFiNINA.h>
 
-#endif#include <Adafruit_MQTT.h> // You will need these Adafruit Libraries to connect to Adafruit IO
+#endif
+#include < Adafruit_MQTT.h > // You will need these Adafruit Libraries to connect to Adafruit IO
 #include <Adafruit_MQTT_Client.h>
 
 // WiFi --------------------------------------------------
@@ -58,11 +59,9 @@ long pTime = 0; // Create a long to keep track of the last time you turned the l
 // Setup -------------------------------------------------
 void setup()
 {
-
   Serial.begin(9600); // Open the Serial port and set the baud rate (communication speed)
   while (!Serial)
-  {
-  } // Do nothing until the Serial port is open
+  {} // Do nothing until the Serial port is open
 
   connectToWiFi(ssid, password); // Connect to the local WiFi network
 
@@ -71,12 +70,9 @@ void setup()
   mqtt.subscribe(&widgetAlert); // Subscribe to the feed you set up above
 
 } // End of setup
-
-
 // Loop --------------------------------------------------
 void loop()
 {
-
   connectToMQTT(); // Connect to Adafruit IO using MQTT
 
   Adafruit_MQTT_Subscribe *subscription; // Create a new Adafruit MQTT Subscribe object

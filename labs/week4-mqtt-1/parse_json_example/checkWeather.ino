@@ -1,7 +1,7 @@
 // This example uses the Dark Sky API, but the general format of this code will work for any API you are requesting JSON data from
 
-void checkWeather() {
-
+void checkWeather()
+{
   String darkSkyApiKey = "your_api_key"; // replace this with your own API key for Dark Sky
   String host = "api.darksky.net"; // put the host name of the API you want to connect to here
   String url = "/forecast/" + darkSkyApiKey + "/55.864473,-4.251814,1580817600?exclude=minutely,hourly,currently,alerts,flags"; // build the URL for your GET request
@@ -29,7 +29,7 @@ void checkWeather() {
   Serial.println("Latitude: " + latitude + ", Longitude:" + longitude); // Print the values you extracted to the Serial port
 
 // In these examples, the data in the JSON is a String – this is indicated by the double quotation marks around the entry on the right of the colon
-// e.g. "summary" : "Windy in the morning.", 
+// e.g. "summary" : "Windy in the morning.",
   String summary = json["daily"]["data"][0]["summary"]; // Here for example, you are telling it to go to the "daily" object, then the "data" array, go to the first entry in the array ( [0] ), then go to the value "summary"
   Serial.println("Summary: " + summary);
 
@@ -40,8 +40,8 @@ void checkWeather() {
   Serial.println("Wind Gust: " + windGust);
 
 // In these examples, the data in the JSON is a float – we can tell this because there are no quotation marks around the entry on the right of the colon
-// and the number has a decimal point, e.g. "temperatureHigh" : 47.88, 
-  float temperatureHigh = json["daily"]["data"][0]["temperatureHigh"]; 
+// and the number has a decimal point, e.g. "temperatureHigh" : 47.88,
+  float temperatureHigh = json["daily"]["data"][0]["temperatureHigh"];
   float temperatureLow = json["daily"]["data"][0]["temperatureLow"];
   Serial.println("High: " + String(temperatureHigh) + ", Low: " + String(temperatureLow));
 

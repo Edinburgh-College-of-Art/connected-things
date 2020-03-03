@@ -30,28 +30,28 @@ const long timer = 5000;
 long pTime;
 
 // Setup -------------------------------------------------------------------------------------
-void setup() {
-
+void setup()
+{
   Serial.begin(9600);
-  while (!Serial) {}
+  while (!Serial)
+  {}
 
   connectToWiFi(ssid, password);
 
   mqtt.publish(&subscribeFeed);
 
 } // End of setup
-
-
 // Loop --------------------------------------------------------------------------------------
-void loop() {
-
+void loop()
+{
   connectToMQTT();
 
   Adafruit_MQTT_Subscribe *subscription;
 
-  while ((subscription = mqtt.readSubscription(2000))) {
-    if (subscription == &subscribeFeed) {
-
+  while ((subscription = mqtt.readSubscription(2000)))
+  {
+    if (subscription == &subscribeFeed)
+    {
       Serial.print("Data received: ");
       Serial.println((char*)subscribeFeed.lastRead);
 
@@ -59,13 +59,16 @@ void loop() {
     }
   }
 
-  if (millis() > pTime + timer) {
-
+  if (millis() > pTime + timer)
+  {
     // Create some data to send to Adafruit IO...
 
-    if (! publishFeed.publish(/*YOUR_DATA*/)) {
+    if (!publishFeed.publish(/*YOUR_DATA*/))
+    {
       Serial.println("Failed!");
-    } else {
+    }
+    else
+    {
       Serial.println("OK!");
     }
   }

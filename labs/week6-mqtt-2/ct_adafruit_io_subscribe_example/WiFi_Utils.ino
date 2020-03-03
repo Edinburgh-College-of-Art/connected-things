@@ -21,7 +21,8 @@ void connectToWiFi(const char ssidName [], const char pass [])
   {
     Serial.println("Idle.");
   }
-  else {
+  else
+  {
     Serial.println("Unknown response.");
   }
 

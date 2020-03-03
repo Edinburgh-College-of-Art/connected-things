@@ -7,8 +7,8 @@
 // The first thing you need to do is add the required libraries
 //#include <WiFiNINA.h> // Use this WiFi library if running this sketch on an Arduino Nano 33 IoT board (the one in your kit)
 #include <WiFi101.h> // Use this WiFi library if running this sketch on Feather M0 board
-#include <Servo.h> // This library allows you to control a Servo attached to the Arduino 
-#include <ArduinoJson.h> // This library is for handling JSON Data in Arduino 
+#include <Servo.h> // This library allows you to control a Servo attached to the Arduino
+#include <ArduinoJson.h> // This library is for handling JSON Data in Arduino
 
 // WiFi Connection -----------------------
 const char* ssid = "HANABI"; // If you are not at ECA, replace these with the name and password for your local wi-fi network
@@ -29,7 +29,7 @@ WiFiSSLClient client; // Create a new WiFi SSL Client – this will give us a se
 // Servo --------------------------------
 Servo myServo; // Create a new Servo object and give it a name
 int currentServoPos = 0; // Create a new int to keep track of the Servo's current position
-#define CENTER_POS 90 // Define three variables to store the different positions the servo needs to move to (to open or close your Paper Signal umbrella) 
+#define CENTER_POS 90 // Define three variables to store the different positions the servo needs to move to (to open or close your Paper Signal umbrella)
 #define UMBRELLA_OPEN 60
 #define UMBRELLA_CLOSED 180
 
@@ -39,8 +39,8 @@ long timer = 300000; // We will use this long in the main loop to control how of
 
 
 // Setup -------------------------------
-void setup() { // runs once
-
+void setup()  // runs once
+{
   connectToWifi(ssid, password); // Call the function that connects the Arduino to WiFi – passing in the values for ssid and password created above
 
   Serial.println("https://" + host + url); // I have included this line to help you test your HTTP request
@@ -49,21 +49,18 @@ void setup() { // runs once
   myServo.attach(9); // This line tells the Arduino which pin the Servo is attached to - change the number in the brackets to match the pin yours is connected to
   moveServoToPos(CENTER_POS, 10); // Call the moveServo() function to move the servo to its starting position at a speed of 10
 }
-
-
 // Loop ---------------------------------
-void loop() { // runs continuously
-
+void loop()  // runs continuously
+{
   checkWeather(); // call the checkWeather function to get a forecast from Dark Sky
   delay(timer); // do nothing for the next five minutes – make sure you include this or you will very quickly hit your rate limit on Dark Sky!
 
 }
-
-
 // Check the Weather ----------------------
-void checkWeather() {
-
-  if (client.connect(host.c_str(), 443)) { // Connect to the client (Dark Sky API) using port 443 (secure connection)
+void checkWeather()
+{
+  if (client.connect(host.c_str(), 443))  // Connect to the client (Dark Sky API) using port 443 (secure connection)
+  {
     Serial.println("Connected to Dark Sky."); // Print a message to the Serial port to let you know the connection has been successful
     client.println("GET " + url + " HTTP/1.1"); // Send your GET request to Dark Sky
     client.println("Host: " + host);
@@ -71,9 +68,11 @@ void checkWeather() {
     client.println(); // Remember to include a line break at the end of your request
   }
 
-  while (client.connected()) { // While you are connected to Dark Sky
+  while (client.connected())  // While you are connected to Dark Sky
+  {
     String line = client.readStringUntil('\n'); // Read in the data it sends you
-    if (line == "\r") { // until you hit a line break
+    if (line == "\r")  // until you hit a line break
+    {
       break;
     }
     Serial.println(line); // This line prints out the response from Dark Sky to the Serial Monitor – this will let you know if your request was successful
@@ -90,7 +89,7 @@ void checkWeather() {
   // If you look at the Dark Sky API documentation you will see a nicely-formatted example response which makes the hierarchical structure of the JSON more obvious
   // Basically what you are telling it in this next section is 'go to the "[daily]" block, then go to the "[data]" array,
   // then go to the first item in the array [0], and finally go to "[icon]" and return the data it holds
-  
+
   String weather = json["daily"]["data"][0]["icon"]; // Extract the 'icon' String from the Json Object
   String rain = "rain"; // Then create three new strings to compare it to – if it matches any of these it is raining
   String sleet = "sleet";
@@ -108,31 +107,38 @@ void checkWeather() {
 
   // You could also write it like this:
   /* bool moveServo;
-    if (weather == rain || weather == sleet || weather == snow) {
-    moveServo = true;
-    } else {
-    moveServo = false;
-    } */
+     if (weather == rain || weather == sleet || weather == snow) {
+     moveServo = true;
+     } else {
+     moveServo = false;
+     } */
 
-  if (moveServo) { // If moveServo == true, it is going to rain
+  if (moveServo)  // If moveServo == true, it is going to rain
+  {
     Serial.println("Yes it is going to rain."); // Print a message to the Serial monitor
     moveServoToPos(UMBRELLA_OPEN, 10); // Call the moveServoToPos function – passing in the position that opens the umbrella and a speed of 10
-  } else { // if moveServo == false, it is not going to rain
+  }
+  else // if moveServo == false, it is not going to rain
+  {
     Serial.println("No it is not going to rain.");
     moveServoToPos(UMBRELLA_CLOSED, 10); // Call the moveServoToPos function – passing in the position that closes the umbrella and a speed of 10
   }
 }
-
-
 // Move the Servo ---------------------------------
-void moveServoToPos(int pos, int sp) { // the two values passed in here tell the Servo what position to move to and how quickly to do it
-  if (pos < currentServoPos) { // if the 'pos' value you just passed in is less than the last recorded Servo position
-    for (int i = currentServoPos; i > pos; i --) { // Use the loop to move the Servo by one degree until it matches the position you just passed in
+void moveServoToPos(int pos, int sp)  // the two values passed in here tell the Servo what position to move to and how quickly to do it
+{
+  if (pos < currentServoPos)  // if the 'pos' value you just passed in is less than the last recorded Servo position
+  {
+    for (int i = currentServoPos; i > pos; i--)  // Use the loop to move the Servo by one degree until it matches the position you just passed in
+    {
       myServo.write(i);
       delay(sp); // The delay here controls how quickly the Servo moves to position – remember this is given in milliseconds
     }
-  } else if (pos > currentServoPos) { // if the 'pos' value you just passed in is greater than the last recorded Servo position 
-    for (int i = currentServoPos; i < pos; i ++) { // Use the loop to move the Servo by one degree until it matches the position you just passed in 
+  }
+  else if (pos > currentServoPos)  // if the 'pos' value you just passed in is greater than the last recorded Servo position
+  {
+    for (int i = currentServoPos; i < pos; i++)  // Use the loop to move the Servo by one degree until it matches the position you just passed in
+    {
       myServo.write(i);
       delay(sp);
     }

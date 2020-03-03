@@ -9,19 +9,19 @@
 
    What pins are connected to what?
 
-   | Arduino Pin | Device pin |
-   | ----------- | ---------- |
-   | 0           |            |
-   | 1           |            |
-   | 2           |            |
-   | 3           |            |
-   | 5V          |            |
-   | GND         |            |
+ | Arduino Pin | Device pin |
+ | ----------- | ---------- |
+ | 0           |            |
+ | 1           |            |
+ | 2           |            |
+ | 3           |            |
+ | 5V          |            |
+ | GND         |            |
 
-  Do you need to add any certificates?
+   Do you need to add any certificates?
 
-  Do you need to add any Libraries?
-*/
+   Do you need to add any Libraries?
+ */
 
 //---------------------------------------------------------------------------------------------------------------------------------------
 // Libraries
@@ -58,7 +58,8 @@ unsigned long updateTimer = 300000;
 void setup()
 {
   Serial.begin(9600);
-  while (!Serial) {} // This line is blocking, remove it when you are finished
+  while (!Serial)
+  {} // This line is blocking, remove it when you are finished
 
   connectToWifi(ssid, password);
 
@@ -66,14 +67,12 @@ void setup()
 
   String someData = json["say"]["hello"][2]["json"]; // This will change depending on the API of course
 
-  Serial.println("\n\nSome Data: ");Serial.println(someData);
+  Serial.println("\n\nSome Data: ");
+  Serial.println(someData);
   Serial.println("Now Get to Work!");
   haltFirmware();
 }
-
 //---------------------------------------------------------------------------------------------------------------------------------------
 
 void loop()
-{
-
-}
+{}

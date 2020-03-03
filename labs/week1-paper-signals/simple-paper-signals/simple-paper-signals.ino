@@ -2,7 +2,7 @@
    Simple Paper Signals
 
    Demonstrates Chaining APIs together to get a custom output
-*/
+ */
 //------------------------------------------------------------------------------
 #include <WiFi101.h>
 #include <Servo.h>
@@ -29,7 +29,9 @@ void setup()
 {
   myservo.attach(9);
   Serial.begin(9600);
-  while (!Serial) {};
+  while (!Serial)
+  {}
+  ;
   connectToWifiNetwork(ssid, password);
 }
 //------------------------------------------------------------------------------

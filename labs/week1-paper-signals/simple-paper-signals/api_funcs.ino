@@ -30,7 +30,6 @@ String getWeather (String lat, String lng)
 
   return getLatLngWeather(latLong);
 }
-
 String getLatLngWeather(String latLong)
 {
   String unixTime = getCurrentUnixTime();
@@ -50,8 +49,6 @@ String getLatLngWeather(String latLong)
   //  Serial.println(weatherPayload);
   return weatherPayload;
 }
-
-
 String getCurrentUnixTime()
 {
   String timeJSON = getJson("worldtimeapi.org", "/api/timezone/Europe/London.json",  80, false);
@@ -64,11 +61,11 @@ String getCurrentUnixTime()
 bool itIsGoingToRain(String location)
 {
   String WeatherJSON = getWeather(location);
-  
+
   DynamicJsonDocument jsonBufferWeather(2048);
   deserializeJson(jsonBufferWeather, WeatherJSON);
   JsonObject weatherRoot = jsonBufferWeather.as<JsonObject>();
-  
+
   String iconWeather = weatherRoot["daily"]["data"][0]["icon"];
   Serial.println(iconWeather);
 
@@ -88,7 +85,8 @@ String urlencode(String str)
   char code0;
   char code1;
   char code2;
-  for (int i = 0; i < str.length(); i++) {
+  for (int i = 0; i < str.length(); i++)
+  {
     c = str.charAt(i);
     if (c == ' ')
     {
@@ -98,7 +96,8 @@ String urlencode(String str)
     {
       encodedString += c;
     }
-    else {
+    else
+    {
       code1 = (c & 0xf) + '0';
       if ((c & 0xf) > 9)
       {

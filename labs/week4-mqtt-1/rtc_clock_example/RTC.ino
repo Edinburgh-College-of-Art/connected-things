@@ -1,6 +1,6 @@
 // setRTC ---------------------------------
-void setRTC() {
-
+void setRTC()
+{
   rtc.begin(); // start the real-time clock
 
   String currentTime = getCurrentTime(); // call the getCurrentTime() function (see below) to make a GET request to the World Time API and return the current time as a String
@@ -23,11 +23,9 @@ void setRTC() {
   rtc.setDate(05, 02, 20); // Put values here to set the current date DD, MM, YY – you could also get this from the World Time API if you wanted
 
 }
-
-
 // getCurrentTime -----------------------
-String getCurrentTime() { // This is a non-void function – which returns a String
-
+String getCurrentTime()  // This is a non-void function – which returns a String
+{
   String timeJSON = getJson("worldtimeapi.org", "/api/timezone/Europe/London.json", 80); // call the getJson function (on the worldtime_api tab)
   // The values you are passing in here are the host name of the server you want to connect to, your request URL, and the port number you want to use (80 means unsecured connection)
   // The data will be returned as a String, which we then need to convert to a JSON Object to parse
@@ -39,12 +37,12 @@ String getCurrentTime() { // This is a non-void function – which returns a Str
   // You can also use the ArduinoJson assistant to help you write code to parse your JSON – see pages 12 – 14 of the 'Parsing Json' slides on Learn for an example
 
   DynamicJsonDocument jsonBuffer(400);
-  
+
   deserializeJson(jsonBuffer, timeJSON); // Next, use this code to copy the data in the String returned by the getJson function into a JSON Object
   JsonObject timeRoot = jsonBuffer.as<JsonObject>();
-  
+
   String timeString = timeRoot["utc_datetime"]; // extract the value for "utc_datetime" from the returned JSON
-  Serial.println(timeString); // print the data to the Serial 
+  Serial.println(timeString); // print the data to the Serial
   String cTime = timeString.substring(11, 16); // use the Arduino function substring() to create another string and extract the current time
   Serial.println(cTime);  // print the new String to the Serial
 

@@ -19,26 +19,25 @@ RTCZero rtc; // create a new RTCZero object and give it a name
 
 
 // Setup --------------------------------
-void setup() {
-
+void setup()
+{
   Serial.begin(9600); // Open the Serial port
-  while (!Serial) {} // Do nothing until the Serial port is ready
+  while (!Serial)
+  {} // Do nothing until the Serial port is ready
 
   connectToWiFi(ssid, password); // connect to the WiFi network
 
-  setRTC(); // call the function to set the real time clock (on RTC tab) 
+  setRTC(); // call the function to set the real time clock (on RTC tab)
 
-  int h = rtc.getHours(); // Use this to check the clock is set correctly 
+  int h = rtc.getHours(); // Use this to check the clock is set correctly
   int m = rtc.getMinutes();
 
   Serial.println("Time from Clock: " + String(h) + ":" + String(m)); // Print the curren time to the Serial port
 
 }
-
-
 // Loop ---------------------------------
-void loop() {
-
+void loop()
+{
   // not used in this example
 
 }

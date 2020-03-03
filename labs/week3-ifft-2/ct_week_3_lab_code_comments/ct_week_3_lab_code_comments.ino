@@ -17,9 +17,8 @@ const char* password = "lowernorwood";
 WiFiClient client; // Create a new WiFiClient – this is an unsecured connection (Port 80)
 
 // Setup -------------------------------
-void setup() { // runs once
-
-  // Call the function that connects you to the WiFi network (on WiFi_Utils tab), passing in the values for ssid and password
+void setup()  // runs once
+{// Call the function that connects you to the WiFi network (on WiFi_Utils tab), passing in the values for ssid and password
   connectToWiFi(ssid, password);
 
   int v1 = int(random(500)); // generate a random integer (whole number) between 0 and 500
@@ -29,10 +28,7 @@ void setup() { // runs once
   // Call the function that sends the HTTP GET Request to IFTTT (on IFTTT tab), passing in the values that you generated above
   connectToIFTTT(v1, v2, v3);
 }
-
 // Loop ---------------------------------
-void loop() { // runs continuously
-
-  // I'm not using the loop in this example – but whatever you do, do not just paste your connectToIFTTT function in here as you will quickly exceed your rate limit!
-
+void loop()  // runs continuously
+{// I'm not using the loop in this example – but whatever you do, do not just paste your connectToIFTTT function in here as you will quickly exceed your rate limit!
 }

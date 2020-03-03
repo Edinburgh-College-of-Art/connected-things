@@ -1,7 +1,7 @@
 // The code on this tab demonstrates how to adjust the brightness of an LED based on a fluctuating variable
 
-void lightLed(float low, float high, float current) {
-
+void lightLed(float low, float high, float current)
+{
   // Arduino's map() function is a useful way to map data to an output on your Arduino. It takes 4 values:
   // the value to map; the lowest possible input value; the highest possible input value; the lowest possible output value; the highest possible output value
   // For more info on how it works see: https://www.arduino.cc/reference/en/language/functions/math/map/

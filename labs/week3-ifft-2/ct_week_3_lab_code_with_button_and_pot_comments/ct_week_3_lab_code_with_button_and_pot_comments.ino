@@ -26,29 +26,30 @@ bool dataSent = false; // this boolean is used to stop the Arduino constantly se
 
 
 // Setup -------------------------------
-void setup() { // runs once
-
-  // Call the function that connects you to the WiFi network (on WiFi_Utils tab), passing in the values for ssid and password
+void setup()  // runs once
+{// Call the function that connects you to the WiFi network (on WiFi_Utils tab), passing in the values for ssid and password
   connectToWiFi(ssid, password);
 
   pinMode(button, INPUT); // tell the Arduino that the button connected to pin 9 is an input
   pinMode(pot, INPUT); // tell the Arduino the potentiometer connected to pin A7 is an input
 }
-
 // Loop ---------------------------------
-void loop() { // runs continuously
-
+void loop()  // runs continuously
+{
   int potReading = analogRead(pot); // read the value of the potentiometer on pin A7
   int v2 = int(random(1024)); // I'm generating random numbers for value 2 and 3 again – but you could equally replace these with other sensors
   int v3 = int(random(1024));
 
   // In this example if the button is not pressed it reads LOW (0), if it is pressed it reads HIGH (1)
-  if (digitalRead(button) == LOW) { // check if the button is pressed – if it is
+  if (digitalRead(button) == LOW)  // check if the button is pressed – if it is
+  {
     dataSent = false; // set dataSent to false and do nothing else
-  } else { // if it is pressed (i.e. reads HIGH)
-    // this next if statement is to stop the Arduino sending GET requests to IFTTT the whole time the button is pressed - without it you will very quickly exceed your rate limit!
-    if (!dataSent) { // check if dataSent is false
-      dataSent = true; // set dataSent to true (to stop the connectToIFTTT function being called more than once for each button press) 
+  }
+  else // if it is pressed (i.e. reads HIGH)
+  {// this next if statement is to stop the Arduino sending GET requests to IFTTT the whole time the button is pressed - without it you will very quickly exceed your rate limit!
+    if (!dataSent)  // check if dataSent is false
+    {
+      dataSent = true; // set dataSent to true (to stop the connectToIFTTT function being called more than once for each button press)
       Serial.println("Sending data..."); // print a message to the Serial port to let you know the button has been pressed
       connectToIFTTT(potReading, v2, v3); // call the connectToIFTTT function (on the IFTTT tab), passing in the reading of the potentiometer and two random numbers that you generated above
     }

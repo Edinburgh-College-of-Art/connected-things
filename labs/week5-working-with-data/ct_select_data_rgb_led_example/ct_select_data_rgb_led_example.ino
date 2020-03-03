@@ -32,10 +32,11 @@ long pTime = 0; // create a long to hold the time (in milliseconds) of your last
 
 
 // Setup --------------------------------------
-void setup() {
-
+void setup()
+{
   Serial.begin(9600); // open the Serial port and sent the baud rate (communication speed)
-  while (!Serial) {} // do nothing until the Serial port is ready
+  while (!Serial)
+  {} // do nothing until the Serial port is ready
 
   pinMode(redLed, OUTPUT); // Set your LED pins to be OUTPUTS
   pinMode(greenLed, OUTPUT);
@@ -45,13 +46,12 @@ void setup() {
   checkWeather(); // call the function that gets the weather forecast from Dark Sky (on checkWeather tab)
 
 }
-
-
 // Loop ---------------------------------------
-void loop() {
-
+void loop()
+{
   // millis() returns the time in milliseconds since the program first started running on the Arduino, see https://www.arduino.cc/reference/en/language/functions/time/millis/ for more info
-  if (millis() > pTime + timer) { // If the current time is greater than the combined value of millis() at the last time the API was called and that of the timer
+  if (millis() > pTime + timer)  // If the current time is greater than the combined value of millis() at the last time the API was called and that of the timer
+  {
     pTime = millis(); // Set pTime to equal the current value of millis() - this is keeping track of when the last API call was made
     checkWeather(); // Call the checkWeather function
   }

@@ -1,29 +1,33 @@
 // The code on this tab is only used to connect your Arduino to Adafruit IO via MQTT
 // You can re-use it in all your programs without changing anything
 
-void connectToMQTT() {
+void connectToMQTT()
+{
+  int8_t ret;
 
-  int8_t ret; 
-
-  if (mqtt.connected()) { 
+  if (mqtt.connected())
+  {
     return;
   }
 
-  Serial.println("Connecting to MQTT..."); 
+  Serial.println("Connecting to MQTT...");
 
   uint8_t retries = 3;
 
-  while ((ret = mqtt.connect()) != 0) {
-    Serial.println(mqtt.connectErrorString(ret)); 
-    Serial.println("Retrying MQTT connection in 5 seconds..."); 
-    mqtt.disconnect(); 
+  while ((ret = mqtt.connect()) != 0)
+  {
+    Serial.println(mqtt.connectErrorString(ret));
+    Serial.println("Retrying MQTT connection in 5 seconds...");
+    mqtt.disconnect();
     delay(5000);
-    retries --; 
-    if (retries == 0) { 
-      while (1);
+    retries--;
+    if (retries == 0)
+    {
+      while (1)
+        ;
     }
   }
 
-  Serial.println("MQTT Connected!"); // If we have connected to Adafruit IO sucessfully, print a success message to the Serial port. 
+  Serial.println("MQTT Connected!"); // If we have connected to Adafruit IO sucessfully, print a success message to the Serial port.
 
 } // End of connectToMQTT

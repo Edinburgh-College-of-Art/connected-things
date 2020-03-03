@@ -3,8 +3,8 @@
 // For instance, if you have a program that is talking to both Dark Sky and IFTTT – use this code as the basis to write two functions,
 // for instance, one called callIFTTT() and another called callDarkSky()
 
-void apiCall() {
-
+void apiCall()
+{
   String host = "your_host"; // Replace with the host name API you want to call
   String apiKey = "your_api_key"; // Remember, not all APIs will require a key
   String url = "your_request_url"; // What you put here will depend on the individual API – look at example requests in its API Documentation for the format

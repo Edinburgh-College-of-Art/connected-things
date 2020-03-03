@@ -17,7 +17,8 @@
 #pragma message "You are Using the IoT Nano 33"
 #include <WiFiNINA.h>
 
-#endif#include <Adafruit_MQTT.h> // You will need these Adafruit Libraries to connect to Adafruit IO
+#endif
+#include < Adafruit_MQTT.h > // You will need these Adafruit Libraries to connect to Adafruit IO
 #include <Adafruit_MQTT_Client.h>
 
 // WiFi ----------------------------------------
@@ -57,23 +58,18 @@ long pTime = 0; // Create a long to keep track of the last time you published da
 // Setup -------------------------------------
 void setup()
 {
-
   Serial.begin(9600); // Open the Serial port and set the baud rate (communication speed)
   while (!Serial)
-  {
-  } // Do nothing until the Serial port is open
+  {} // Do nothing until the Serial port is open
 
   connectToWiFi(ssid, password); // connect to the local WiFi network
 
   pinMode(potPin, INPUT); // set the pinMode for your potentiometer pin
 
 } // End of Setup
-
-
 // Loop --------------------------------------
 void loop()
 {
-
   connectToMQTT(); // Connect to Adafruit IO using MQTT – see the MQTT_Utils tab for code
 
   if (millis() > pTime + timer)  // If five seconds has elapsed since the last time we published data to Adafruit IO
@@ -97,7 +93,8 @@ void loop()
     {
       Serial.println("Failed."); // ... print an error message.
     }
-    else {
+    else
+    {
       Serial.println("OK!"); // But if it has been successful, print a success message to the Serial.
     }
   }

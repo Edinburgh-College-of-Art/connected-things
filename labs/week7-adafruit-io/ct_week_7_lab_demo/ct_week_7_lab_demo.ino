@@ -14,7 +14,7 @@ const char* password = "YOUR_PASSWORD"; // Replace with the password for your lo
 #define ioServer "io.adafruit.com"
 #define ioPort 1883
 #define ioUsername "YOUR_ADAFRUIT_USERNAME" // define your Adafruit username
-#define ioKey "YOUR_ADAFRUIT_AIO_KEY" // define your Adafruit API Key 
+#define ioKey "YOUR_ADAFRUIT_AIO_KEY" // define your Adafruit API Key
 
 // Clients -----------------------------------------------
 WiFiClient client;
@@ -36,10 +36,11 @@ const int servoPin = 7;
 
 
 // Setup --------------------------------------------------
-void setup() {
-
+void setup()
+{
   Serial.begin(9600);
-  while (!Serial) {}
+  while (!Serial)
+  {}
 
   connectToWiFi(ssid, password);
 
@@ -51,20 +52,20 @@ void setup() {
   mqtt.subscribe(&dataFeed);
 
 } // End of setup
-
-
 // Loop ---------------------------------------------------
-void loop() {
-
+void loop()
+{
   connectToMQTT();
 
   Adafruit_MQTT_Subscribe *subscription; // Create a new Adafruit MQTT Subscribe object
 
-  while ((subscription = mqtt.readSubscription(5000))) {
-    if (subscription == &dataFeed) {
+  while ((subscription = mqtt.readSubscription(5000)))
+  {
+    if (subscription == &dataFeed)
+    {
       Serial.print("Got: ");
       Serial.println((char *)dataFeed.lastread);
-      
+
       digitalWrite(ledPin, HIGH);
       pTime = millis();
 
@@ -80,9 +81,11 @@ void loop() {
   }
 
   // Turn the LED on and off ------------------------------
-  if (millis() > pTime + timer) {
+  if (millis() > pTime + timer)
+  {
     pTime = millis();
-    if (digitalRead(ledPin) == HIGH) {
+    if (digitalRead(ledPin) == HIGH)
+    {
       digitalWrite(ledPin, LOW);
     }
   }

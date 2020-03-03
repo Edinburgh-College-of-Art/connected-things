@@ -3,7 +3,6 @@
 
 void connectToMQTT()
 {
-
   int8_t ret; // Create an signed int (8 bytes) to hold the status code returned by the Adafruit IO server
 
   if (mqtt.connected())  // If MQTT is already connected, Arduino will return to the main loop and not execute any of the code below

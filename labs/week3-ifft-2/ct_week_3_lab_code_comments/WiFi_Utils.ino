@@ -1,7 +1,8 @@
-void connectToWiFi(const char ssidName [], const char pass[]) {
-
+void connectToWiFi(const char ssidName [], const char pass[])
+{
   Serial.begin(9600); // open the Serial port and set the baud rate (communication speed)
-  while (!Serial) {} // wait until the Serial port is open
+  while (!Serial)
+  {} // wait until the Serial port is open
 
   WiFi.setPins(8, 7, 4, 2); // you can skip this step if using the IoT 33 Nano instead of a Feather
 
@@ -10,11 +11,16 @@ void connectToWiFi(const char ssidName [], const char pass[]) {
 
   int conn = WiFi.begin(ssidName, pass); // connect to the WiFi network
 
-  if (conn == WL_CONNECTED) { // check if you've successfully connected to the WiFi network
+  if (conn == WL_CONNECTED)  // check if you've successfully connected to the WiFi network
+  {
     Serial.println("OK!"); // if connected print a confirmation message to the Serial
-  } else if (conn == WL_IDLE_STATUS) { // if you've not connected sucessfully print an error message
+  }
+  else if (conn == WL_IDLE_STATUS)  // if you've not connected sucessfully print an error message
+  {
     Serial.println("Idle.");
-  } else {
+  }
+  else
+  {
     Serial.println("Unknown Response.");
   }
 

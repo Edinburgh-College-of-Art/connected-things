@@ -1,6 +1,6 @@
 /*
    get the weather from the DarkSkyAPI
-*/
+ */
 #include <WiFi101.h>
 #include <Servo.h>
 //----------------------------------------------------------------------------
@@ -55,9 +55,5 @@ void setup()
   }
 
 }
-
 void loop()
-{
-
-
-}
+{}

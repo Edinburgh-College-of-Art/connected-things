@@ -1,12 +1,11 @@
 unsigned int makeGetRequest(String &host, String &url, Client &httpClient, int port, bool &chunked)
 {
-
   Serial.println(((port == 443) ? ("https://") : ("http://")) + host + url);
   unsigned int contentLength;
   chunked = false;
 
   if (httpClient.connect(host.c_str(), port))
-  {    
+  {
     httpClient.println("GET " + url + " HTTP/1.1");
     httpClient.println("Host: " + host);
     httpClient.println("Connection: close");
@@ -38,7 +37,6 @@ unsigned int makeGetRequest(String &host, String &url, Client &httpClient, int p
   }
   return contentLength;
 }
-
 JsonObject makeAPIcall(String & host, String & url, Client &httpClient, int port)
 {
   bool chunked = false;
@@ -66,15 +64,12 @@ JsonObject makeAPIcall(String & host, String & url, Client &httpClient, int port
   deserializeJson(buffer, httpResponse);
   return buffer.as < JsonObject > ();
 }
-
 //---------------------------------------------------------------------------------------------------------------------------------------
 
 unsigned int getContentLength(String line)
 {
   return line.substring(16).toInt(); // This line prints out the response from Carbon Intensity to the Serial Monitor – this will let you know if your request was successful
 }
-
-
 //---------------------------------------------------------------------------------------------------------------------------------------
 
 unsigned int parseChunked(Client &httpClient)
@@ -104,7 +99,7 @@ unsigned int parseChunked(Client &httpClient)
       }
       else
       {
-        if (t != ' ' && t != '\r' && t != '\n') 
+        if (t != ' ' && t != '\r' && t != '\n')
         {
           httpResponse[charCounter] = t;
           charCounter++;
@@ -121,7 +116,6 @@ unsigned int parseChunked(Client &httpClient)
   }
   return charCounter;
 }
-
 //---------------------------------------------------------------------------------------------------------------------------------------
 
 unsigned int parseContent(unsigned int contentLength, Client &httpClient)
@@ -149,7 +143,6 @@ unsigned int parseContent(unsigned int contentLength, Client &httpClient)
   }
   return charCounter;
 }
-
 //---------------------------------------------------------------------------------------------------------------------------------------
 
 

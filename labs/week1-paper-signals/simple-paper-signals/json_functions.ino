@@ -50,7 +50,7 @@ String getJson(String host, String url, const int port, bool debug)
     if (sslClient.connect(host.c_str(), port))
     {
       if (debug)
-        Serial.println("connected to server") ;
+        Serial.println("connected to server");
 
       sslClient.println("GET " + url + " HTTP/1.1");
       sslClient.println("Host: " + host);
