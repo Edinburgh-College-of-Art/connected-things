@@ -38,7 +38,7 @@ void setup()
 
   connectToWiFi(ssid, password);
 
-  mqtt.publish(&subscribeFeed);
+  mqtt.subscribe(&subscribeFeed);
 
 } // End of setup
 // Loop --------------------------------------------------------------------------------------
