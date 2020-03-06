@@ -145,7 +145,6 @@ unsigned int parseContent(unsigned int contentLength, Client &httpClient)
 }
 //---------------------------------------------------------------------------------------------------------------------------------------
 
-
 void printHttpResponse(unsigned int charCount)
 {
   for (int i = 0; i < charCount; i++)
