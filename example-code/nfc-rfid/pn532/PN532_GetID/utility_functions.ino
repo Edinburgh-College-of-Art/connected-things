@@ -1,31 +1,29 @@
 void haltFirmware()
 {
   Serial.println("HALTING FIRMWARE!");
-  while (true)
-  {
+  while (true) {
     sos();
   }
 }
-
+//==============================================================================
 void waitForSerial()
 {
   while (!Serial) {}
 }
-
-
+//==============================================================================
 void waitForSerialInput()
 {
   Serial.println("\n\nSend a character to run the mem dumper again!");
   Serial.flush();
-  while (!Serial.available()) {};
-  while (Serial.available())
-  {
+  while (!Serial.available()) {}
+  ;
+  while (Serial.available()) {
     Serial.read();
   }
   Serial.flush();
   Serial.println("Waiting for another ISO14443A Card");
 }
-
+//==============================================================================
 void sos()
 {
   const int dot = 200, dash = 800;
@@ -51,4 +49,10 @@ void sos()
     delay(dot);
   }
   delay(dash);
+}
+//==============================================================================
+void beep()
+{
+  pinMode(buzzerPin, OUTPUT);
+  tone(buzzerPin, 3000, 100);
 }

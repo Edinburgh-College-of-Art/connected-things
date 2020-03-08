@@ -4,15 +4,16 @@
     Pin Map
     -------
 
-    | Nano | PN532           |
-    | ---- | --------------- |
-    | VIN  | 3.3v            |
-    | 13   | SCK             |
-    | 12   | MISO            |
-    | 11   | MOSI / SDA / TX |
-    | 10   | SSEL / SCL / RX |
-    | GND  | GND             |
-*/
+ | Nano | PN532           |
+ | ---- | --------------- |
+ | VIN  | 3.3v            |
+ | 13   | SCK             |
+ | 12   | MISO            |
+ | 11   | MOSI / SDA / TX |
+ | 10   | SSEL / SCL / RX |
+ | GND  | GND             |
+
+ */
 //==============================================================================
 #include <Wire.h>
 #include <SPI.h>
@@ -21,6 +22,10 @@
 const uint8_t buzzerPin = 6;
 //==============================================================================
 const uint8_t sselPin = 10;
+
+const uint8_t numUuids = 10;
+uint32_t idList[numUuids];
+uint8_t idIndex = 0;
 Adafruit_PN532 nfc(sselPin);
 //==============================================================================
 void setup(void)
@@ -39,7 +44,15 @@ void setup(void)
 void loop(void)
 {
   //----------------------------------------------------------------------------
-  getID();
+  uint32_t uuid = getID();
+  if (isUuidInList(uuid))
+  {
+    Serial.println("You've been here before.");
+  }
+  else
+  {
+    addToList(uuid);
+  }
   //----------------------------------------------------------------------------
   waitForSerialInput();
   //----------------------------------------------------------------------------
