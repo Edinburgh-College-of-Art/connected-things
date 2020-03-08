@@ -26,7 +26,7 @@ Code related to connecting to communicating with ThingSpeak. Make sure to downlo
 
 ### JSON
 
-[Say hello to JSON isaacs](https://raw.githubusercontent.com/keikoro/isaacs.JSON/master/isaacs.JSON)
+JSON Test is a handy place to start with grabbing JSON data. The time example is handy in and off itself (http://date.jsontest.com), or you can [say hello to JSON Isaacs](https://raw.githubusercontent.com/keikoro/isaacs.JSON/master/isaacs.JSON)
 
 ### Web Server
 
