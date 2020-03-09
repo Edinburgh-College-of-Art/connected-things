@@ -6,7 +6,7 @@ void setupReader()
   if (!versiondata)
   {
     Serial.print("Didn't find PN53x board");
-    haltFirmware();
+    gameOver();
   }
 
   printVersionNumber(versiondata);
@@ -137,7 +137,7 @@ void printBlock(unsigned int blockNum)
 void memoryDumpCard()
 {
   uint8_t success;                          // Flag to check if there was an error with the PN532
-  uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 };  // Buffer to store the returned UID
+  uint8_t uid[7];  // Buffer to store the returned UID
   uint8_t uidLength;                        // Length of the UID (4 or 7 bytes depending on ISO14443A card type)
   uint8_t currentblock;                     // Counter to keep track of which block we're on
   bool authenticated = false;               // Flag to indicate if the sector is authenticated

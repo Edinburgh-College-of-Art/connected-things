@@ -1,4 +1,4 @@
-void haltFirmware()
+void gameOver()
 {
   Serial.println("Game Over!");
   while (true) {

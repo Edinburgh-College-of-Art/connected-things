@@ -59,14 +59,24 @@ void loop(void)
     {
       Serial.println("Oh No! Zombies, mission failed");
     }
+    if ((numberOfMissions - mission) < (survivalThreshold - missionSuccessCounter))
+    {
+      Serial.println("Zombies Win");
+      gameOver();
+    }
+    else if (missionSuccessCounter >= survivalThreshold)
+    {
+      Serial.println("Humans Win");
+      gameOver();
+    }
   }
-  //  if (missionSuccessCounter >= survivalThreshold)
-  //  {
-  //    Serial.println("Humans Win");
-  //  }
-  //  else
-  //  {
-  //    Serial.println("Zombies Win");
-  //  }
-  //  haltFirmware();
+  if (missionSuccessCounter >= survivalThreshold)
+  {
+    Serial.println("Humans Win");
+  }
+  else
+  {
+    Serial.println("Zombies Win");
+  }
+  gameOver();
 }
