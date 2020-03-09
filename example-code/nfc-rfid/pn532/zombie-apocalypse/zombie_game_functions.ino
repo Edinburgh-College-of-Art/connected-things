@@ -46,9 +46,8 @@ uint32_t waitForCard()
   return fullUuid;
 }
 //==============================================================================
-boolean isMissionSuccess()
+boolean isMissionSuccess() // go on a mission
 {
-  // go on a mission
   uint32_t team[teamSize] = {0};
   setTeam(team, 3);
   return !areZombiesOnTeam(team);
