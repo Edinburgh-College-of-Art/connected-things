@@ -26,7 +26,7 @@ void printVersionNumber(uint32_t &versiondata)
 //==============================================================================
 uint32_t getID()
 {
-  uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 };
+  uint8_t uid[7];
   uint8_t uidLength;
   uint32_t fullUuid = 0;
   uint8_t success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength);
@@ -40,7 +40,8 @@ uint32_t getID()
     case 4:
       for (int i = 0; i < 4; i++)
       {
-        fullUuid |= (uid[i] << (8 * i));
+        uint8_t shift = 8 * (3 - i);
+        fullUuid |= (uid[i] << shift);
       }
       break;
     case 7:
