@@ -6,7 +6,48 @@ Code resources for Product Design: Connected Things course
 
 # Contents
 
-## Feather M0
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Product Design: Connected Things](#product-design-connected-things)
+- [Contents](#contents)
+	- [labs](#labs)
+	- [examples-code](#examples-code)
+	- [Boards](#boards)
+		- [Arduino Nano 33 IoT](#arduino-nano-33-iot)
+		- [Feather M0](#feather-m0)
+		- [Setup](#setup)
+	- [Concepts](#concepts)
+		- [Thing Speak](#thing-speak)
+		- [IFTTT](#ifttt)
+		- [JSON](#json)
+	- [Sensors](#sensors)
+		- [OLED Feather Wing](#oled-feather-wing)
+		- [37 Sensors](#37-sensors)
+		- [Grove Sensors](#grove-sensors)
+		- [Neo Pixels](#neo-pixels)
+	- [Communication](#communication)
+		- [MQTT](#mqtt)
+			- [ThingSpeak](#thingspeak)
+
+<!-- /TOC -->
+
+***
+
+## labs
+
+Code relating to each week's labs.
+
+## examples-code
+
+General examples for covering various programming concepts and breakout boards available at ECA.
+
+## Boards
+
+The following boards will be used throughout the course.
+
+### Arduino Nano 33 IoT
+
+### Feather M0
 
 Code relating to using the Adafruit Feather M0 ATWINC1500 micro-controller.
 
@@ -15,6 +56,10 @@ Code relating to using the Adafruit Feather M0 ATWINC1500 micro-controller.
 ### Setup
 
 Visit Adafruit for comprehensive setup instructions for the Feather M0
+
+***
+
+## Concepts
 
 ### Thing Speak
 
@@ -28,29 +73,7 @@ Code related to connecting to communicating with ThingSpeak. Make sure to downlo
 
 JSON Test is a handy place to start with grabbing JSON data. The time example is handy in and off itself (http://date.jsontest.com), or you can [say hello to JSON Isaacs](https://raw.githubusercontent.com/Edinburgh-College-of-Art/Connected-Things/master/example-code/json/example-data.json)
 
-### Web Server
-
-Code relating to setting the Feather M0 as web server, serving html webpages and providing a wireless access point.
-
-### Timer Interrupts
-
-Code demonstrating how to use the timers available on the Feather M0. This differs from the approach you would take if using an Arduino Uno, but the code has been structured in such a way that you shouldn't have to worry to much about what is happening under-the-hood. Timer interrupts are used to make actions happen at regular intervals. This means that you won't be able to use the `delay()` function.
-
-Download the [Adafruit ZeroTimer Library](https://github.com/adafruit/Adafruit_ZeroTimer) for greater control.
-
-* * *
-
-## Feather HUZZAH
-
-Code relating to using the Adafruit Feather HUZZAH ESP8266 micro-controller.
-
-[Visit Adafruit for comprehensive setup instructions for the Feather ESP8266](https://learn.adafruit.com/adafruit-feather-huzzah-esp8266/using-arduino-ide)
-
-###### TIPS
-
--   Don't open Serial Monitor when uploading
-
-* * *
+***
 
 ## Sensors
 
