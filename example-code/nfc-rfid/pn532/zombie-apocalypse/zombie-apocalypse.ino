@@ -22,15 +22,17 @@
 const uint8_t buzzerPin = 6;
 //==============================================================================
 const uint8_t sselPin = 10;
-const uint8_t numPlayers = 5;
-uint32_t player[numPlayers] = {0};
-uint8_t idIndex = 0;
+
 Adafruit_PN532 nfc(sselPin);
 //==============================================================================
+const uint8_t numPlayers = 4;
+uint32_t player[numPlayers] = {0};
+
+//==============================================================================
 const uint8_t teamSize = 3;
-uint8_t numberOfMissions = 5;
+uint8_t numberOfMissions = 4;
 uint8_t missionSuccessCounter = 0;
-uint8_t survivalThreshold = 3;
+uint8_t survivalThreshold = 2;
 //==============================================================================
 uint8_t zombieGroup;
 //==============================================================================

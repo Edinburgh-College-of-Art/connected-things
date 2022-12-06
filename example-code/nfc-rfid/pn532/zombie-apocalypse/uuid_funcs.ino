@@ -12,9 +12,10 @@ bool isUuidInList(uint32_t testUuid, uint32_t* uidList, uint8_t listLength)
   return inList;
 }
 //==============================================================================
-void addToList(uint32_t newUuid)
+void addPlayer(uint32_t newUuid)
 {
-  player[idIndex] = newUuid;
-  idIndex++;
-  idIndex %= numPlayers;
+  static unsigned int playerIndex = 0;
+  player[playerIndex] = newUuid;
+  playerIndex ++;
+  playerIndex  %= numPlayers;
 }

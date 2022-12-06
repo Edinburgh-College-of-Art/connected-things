@@ -2,10 +2,6 @@
 
 void connectToWifi(const char ssidName[], const char pass[])
 {
-#ifdef ARDUINO_SAMD_ZERO
-  WiFi.setPins(8, 7, 4, 2); // Set the WiFi pins on the Feather
-#endif
-
   Serial.println("Starting...");
   Serial.println("Connecting to WiFi.");
 
@@ -28,5 +24,5 @@ void connectToWifi(const char ssidName[], const char pass[])
 void haltFirmware()
 {
   Serial.println("\n\nSTOPPING THE PROGRAM!");
-  while(true) {}
+  while(true) delay(10);
 }

@@ -40,20 +40,20 @@
 const unsigned int CHARACTER_LIMIT= 10000; // Limit of characters in HTTP response
 //---------------------------------------------------------------------------------------------------------------------------------------
 // WiFi Connection
-const char* ssid = "YOUR_SSID";          // replace these with the name and password for your local wi-fi network
-const char* password = "YOUR_PASSWORD";
+const char* ssid = "Major Crimes";          // replace these with the name and password for your local wi-fi network
+const char* password = "The Bunk";
 //---------------------------------------------------------------------------------------------------------------------------------------
 // API
 String host = "raw.githubusercontent.com";
 String url = "/Edinburgh-College-of-Art/Connected-Things/master/example-code/json/example-data.json";
 //---------------------------------------------------------------------------------------------------------------------------------------
 // WiFi Client
-WiFiSSLClient sslClient;  // HTTPS
-WiFiClient client;        // HTTP
-char httpResponse[CHARACTER_LIMIT]; // If you are getting responses larger that 10kB, use another request.
+//WiFiSSLClient sslClient;  // HTTPS
+//WiFiClient client;        // HTTP
+//char httpResponse[CHARACTER_LIMIT]; // If you are getting responses larger that 10kB, use another request.
 //---------------------------------------------------------------------------------------------------------------------------------------
 // Timer
-unsigned long updateTimer = 300000;
+//unsigned long updateTimer = 300000;
 //---------------------------------------------------------------------------------------------------------------------------------------
 void setup()
 {
@@ -63,12 +63,12 @@ void setup()
 
   connectToWifi(ssid, password);
 
-  JsonObject json = makeAPIcall(host, url, client, 443);
-
-  String someData = json["say"]["hello"][2]["json"]; // This will change depending on the API of course
-
-  Serial.println("\n\nSome Data: ");
-  Serial.println(someData);
+//  JsonObject json = makeAPIcall(host, url, client, 443);
+//
+//  String someData = json["say"]["hello"][2]["json"]; // This will change depending on the API of course
+//
+//  Serial.println("\n\nSome Data: ");
+//  Serial.println(someData);
   Serial.println("Now Get to Work!");
   haltFirmware();
 }

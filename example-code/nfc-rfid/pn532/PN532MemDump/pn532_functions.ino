@@ -12,7 +12,7 @@ void setupReader()
   Serial.print("Found chip PN5"); Serial.println((versiondata >> 24) & 0xFF, HEX);
   printVersionNumber(versiondata);
 
-  nfc.SAMConfig();  
+  nfc.SAMConfig();
 }
 
 void printVersionNumber(uint32_t &versiondata)
@@ -32,6 +32,16 @@ void memoryDumpCard()
   bool authenticated = false;               // Flag to indicate if the sector is authenticated
   uint8_t data[16];                         // Array to store block data during reads
   uint8_t keyuniversal[6] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
+//  uint8_t keyuniversal[6] {0XFF, 0XFF, 0XFF, 0XFF, 0XFF, 0XFF};
+//  uint8_t keyuniversal[6] {0XD3, 0XF7, 0XD3, 0XF7, 0XD3, 0XF7};
+//  uint8_t keyuniversal[6] {0XA0, 0XA1, 0XA2, 0XA3, 0XA4, 0XA5};
+//  uint8_t keyuniversal[6] {0XB0, 0XB1, 0XB2, 0XB3, 0XB4, 0XB5};
+//  uint8_t keyuniversal[6] {0X4D, 0X3A, 0X99, 0XC3, 0X51, 0XDD};
+//  uint8_t keyuniversal[6] {0X1A, 0X98, 0X2C, 0X7E, 0X45, 0X9A};
+//  uint8_t keyuniversal[6] {0XAA, 0XBB, 0XCC, 0XDD, 0XEE, 0XFF};
+//  uint8_t keyuniversal[6] {0X00, 0X00, 0X00, 0X00, 0X00, 0X00};
+//  uint8_t keyuniversal[6] {0XAB, 0XCD, 0XEF, 0X12, 0X34, 0X56};
+
   //----------------------------------------------------------------------------
   success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength);
   if (success)

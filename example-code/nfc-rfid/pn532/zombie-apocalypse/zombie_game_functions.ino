@@ -11,10 +11,10 @@ void setupZombieGame()
     Serial.print("Group:");
     Serial.print(p);
     Serial.println(" present your card");
-    uint32_t newGroup = waitForCard();
-    if (!isUuidInList(newGroup, player, numPlayers))
+    uint32_t newPlayer = waitForCard();
+    if (!isUuidInList(newPlayer, player, numPlayers))
     {
-      addToList(newGroup);
+      addPlayer(newPlayer);
       writeBlock(4, (p == zombieGroup) ? "ZOMBIE" : "HUMAN ");
       p++;
     }
